@@ -7,4 +7,4 @@ Try add comments here
 
 Tested and is working :P (Andre)
 
-we work as a group.
+we work as a group. or as a team
