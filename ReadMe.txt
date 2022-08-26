@@ -5,6 +5,8 @@ Django Project
 Test file to check Repository is working
 Try add comments here
 
-Tested and is working :P (Andre)
+Tested and is working :P 
+
+Andre
 
 we work as a group. or as a team
