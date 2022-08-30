@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
+# Register your models here.
 from .models import CustomUser
-from.forms import CustomUserCreationForm, CustomUserChangeForm
-
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
@@ -17,9 +17,10 @@ class CustomUserAdmin(UserAdmin):
         "age",
     ]
 
-    fieldsets = UserAdmin.fieldsets + ((None, {"fields": ("age",), }),)
+    #when editing, what are data afields avaialable for existing user
+    fieldsets = UserAdmin.fieldsets + ((None, {"fields": ("age", )}),)
 
-    add_fieldsets = UserAdmin.add_fieldsets + ((None, {"fields": ("age",), }),)
-
+    # when creating, what are the data fields required for the new user
+    add_fieldsets = ((None, {"fields": ("email","username","password1","password2","age", )}),)
 
 admin.site.register(CustomUser, CustomUserAdmin)
