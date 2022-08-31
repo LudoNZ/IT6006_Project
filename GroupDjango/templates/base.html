@@ -8,27 +8,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} GET IT PYTHON {% endblock title %}</title>
     <link rel="stylesheet" href="{% static '/css/main.css' %}">
-    <!-- <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/x-icon"> -->
+    <link rel="shortcut icon" href="{% static 'images/book_white.png' %}" type="image/x-icon">
 </head>
 
 <body>
     <header>
-        <nav>
-            <a href="#">Logo</a>
-            <a href="#">Home</a>
-            <a href="#">Python Tutorial</a>
-            <a href="#">Award</a>
-            <a href="#">Q & A</a>
-            <a href="#">Setting</a>
-            <a href="#">Login</a>
-        </nav>
+        <div class="fullwidth">
+            <div class="gridbox">
+                <div style="float:left;"><div style="float:left;margin-top:15px"><img src="{% static 'images/book_white.png' %}" alt="Girl in a jacket" width="32" height="32"></div><div style="float:left;margin-left:15px"><h2>Python Ludo Tutorial</h2></div></div>
+                <div class="buttonbox">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}"><div class="navbutton">Logout</div></a>
+                    {% else %}
+                        <a href="{% url 'login' %}"><div class="navbutton">Login</div></a>
+                        <a href="{% url 'signup' %}"><div class="navbutton">Sign Up</div></a>
+                    {% endif %}
+                    <a href="{% url 'about' %}"><div class="navbutton">About</div></a>
+                    <a href="{% url 'home' %}"><div class="navbutton">Home</div></a>
+                    
+                    
+                </div>
+            </div>
+        </div>
     </header>
-    <main>
+    <section>
+        <img src="{% static 'images/bannerlearing.png' %}" alt="Girl in a jacket" width="633" height="350">
         {% block content %} {% endblock content %}
-    </main>
-    <footer>
-
-    </footer>
+    </section>
 </body>
 
 </html>

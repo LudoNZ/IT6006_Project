@@ -1,0 +1,48 @@
+body{
+    width:100%;
+    padding:0px;
+    margin: 0px;
+    text-align:center;
+}
+
+header{
+    color: white;
+}
+
+section{
+    display:inline-block;
+    width:900px;
+    text-align: left;
+}
+
+.fullwidth {
+    width: 100%;
+    text-align:center;
+    display:inline-block;
+    background-color:darkslategrey;
+}
+
+.gridbox {
+    display:inline-block;
+    width:900px;
+}
+.navbutton {
+    padding: 5px;
+    float: right;
+    text-align: center;
+    width:80px;
+    color: White;
+}
+.navbutton:hover {
+    float: right;
+    text-align: center;
+    width:80px;
+    background-color:blanchedalmond;
+    color: Black;
+}
+.buttonbox {
+    padding-top:20px;
+    display: inline-block;
+    vertical-align: middle;
+    float:right;
+}
