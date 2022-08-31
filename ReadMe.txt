@@ -12,3 +12,5 @@ python manage.py makemigrations accounts
 python manage.py makemigrations pages
 python manage.py migration
 python manage.py runserver
+
+demonstrate second time
