@@ -18,6 +18,7 @@
                 <div style="float:left;"><div style="float:left;margin-top:15px"><img src="{% static 'images/book_white.png' %}" alt="Girl in a jacket" width="32" height="32"></div><div style="float:left;margin-left:15px"><h2>Python Ludo Tutorial</h2></div></div>
                 <div class="buttonbox">
                     {% if user.is_authenticated %}
+                        <a href="{% url 'course_list' %}"><div class="navbutton">Courses</div></a>
                         <a href="{% url 'logout' %}"><div class="navbutton">Logout</div></a>
                     {% else %}
                         <a href="{% url 'login' %}"><div class="navbutton">Login</div></a>
