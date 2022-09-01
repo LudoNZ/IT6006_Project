@@ -30,7 +30,8 @@ class Content(models.Model):
     example = models.TextField(max_length=500)
 
     def __str__(self):
-        return self.name
+        str = self.topic.course.name + ", " + self.topic.name + ", " + self.name
+        return str
 
 class Questions(models.Model):
     content = models.ForeignKey(Content, on_delete= models.CASCADE)
@@ -38,4 +39,5 @@ class Questions(models.Model):
     answer = models.BooleanField()
 
     def __str__(self):
-        return self.question
+        str = self.content.topic.course.name + ", " + self.content.topic.name + ", " + self.content.name + ", " + self.question
+        return str
