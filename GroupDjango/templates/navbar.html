@@ -1,0 +1,26 @@
+{% load static %}
+
+<!-- ########################## Header/Navbar ########################## -->
+<nav class="container">
+    <div class="topnav" id="myTopnav">
+        <a>
+        <image id="logo" src="{% static 'images/getitLogo.png' %}" alt="GET IT PYTHON Logo"></image>
+        </a>
+        <a id="menu" href="{% url 'home' %}">Home</a>
+        <a id="menu" href="{% url 'about' %}">About</a>
+        <a id="menu" href="#">Tutorial</a>
+        <a id="menu" href="#">Q &amp; A</a>
+
+        {% if user.is_authenticated %}
+            <a id="right" href="{% url 'course_list' %}"><div class="navbutton">Your Courses</div></a>
+            <a id="right" href="{% url 'logout' %}"><div class="navbutton">Logout</div></a>
+        {% else %}
+            <a id="right" href="{% url 'login' %}"><div class="navbutton">Login <i class="fas fa-sign-in-alt"></i></div></a>
+            <a id="right" href="{% url 'signup' %}"><div class="navbutton">Sign Up</div></a>
+        {% endif %}
+
+        <a id="menu_icon" href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+        </a>
+    </div>
+</nav>
