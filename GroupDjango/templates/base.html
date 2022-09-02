@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} GET IT PYTHON {% endblock title %}</title>
     <link rel="stylesheet" href="{% static '/css/main.css' %}">
+    <link rel="stylesheet" href="{% static '/css/courses.css' %}">
     <link rel="shortcut icon" href="{% static 'images/book_white.png' %}" type="image/x-icon">
 
     <!-- Font -->
@@ -25,14 +26,12 @@
 
 <body>
     <header>
-        <h1>hello im here</h1>
-        <h2>test</h2>
         {% include "navbar.html" %}
     </header>
     <main>
         {% block content %} 
         {% endblock content %}
-        
+
     </main>
     <footer>
         {% include "mobile_ad.html" %}

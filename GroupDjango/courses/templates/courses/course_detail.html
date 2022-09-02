@@ -7,17 +7,14 @@
 
 
 {% block content %}
-
-    <section>
-            
+    <section class="course_container">
+        <div class="container">
+        
         <div>
-            {{ course.name }} |
-            <span>Name: {{ course.name }}</span> |
-            <span> {{ course.whatHeading }} </span>
+            <h1>Course Name: {{ course.name }} </h1>
+            <span> {{ course.whatHeading }} </span><br>
             <span> {{ course.whatDescription }} </span>
         </div>
-
-
+        </div>
     </section>
-
 {% endblock content %}
