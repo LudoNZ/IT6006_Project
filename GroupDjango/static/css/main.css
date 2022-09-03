@@ -38,7 +38,6 @@ button {
 }
 
 
-
 /* NAVBAR STYLING */
 .navbar {
     display: flex;
@@ -47,7 +46,6 @@ button {
     padding: 20px;
     color: #444444;
     overflow: hidden;
-
 }
 
 .nav-links a {
@@ -391,7 +389,6 @@ nav {
         padding-right: 1rem;
         margin-bottom: 2rem;
     }
-
 }
 
 
