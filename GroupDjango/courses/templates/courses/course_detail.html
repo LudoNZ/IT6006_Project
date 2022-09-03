@@ -27,7 +27,7 @@
                 <h5>-{{topic.name}}</h5>
 
                 {% for content in topic.content_set.all %}
-                    <p>--{{content.name}}</p>
+                    <p>--{{content.name}} {{content.minutesToComplete}}min</p>
                 {% endfor content %}
 
             {% endfor topic %}
