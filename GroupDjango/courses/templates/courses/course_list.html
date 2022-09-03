@@ -7,18 +7,18 @@
 
 
 {% block content %}
-    <section class="course_container">
-        <div class="container">
-        <h1>Course List Page</h1>
-        <ul>
-        {% for course in course_list %}
-            <li>
-                <a href="{% url 'course_detail' course.pk %}">
-                    {{ course.name }}
-                </a>
-            </li>       
-        {% endfor %}
-        </ul>
-        </div>
-    </section>
+<section class="container">
+    <div class="course_container">
+    <h1 class="course_heading">Course List</h1>
+    <p class="border"><p>
+    {% for course in course_list %}
+        <h2 class="course_title">
+            <a href="{% url 'course_detail' course.pk %}">
+                {{ course.name }}
+            </a>
+            
+        </h2>
+    {% endfor %}
+    </div>
+</section>
 {% endblock content %}

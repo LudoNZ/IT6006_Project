@@ -1,13 +1,19 @@
-<section class="course_container">
-    <div class="container">
-    <h1>Topic List Page</h1>
-    
-    {% for topic in topic_list %}
+{% extends "base.html" %}
+{% block title %} 
+    Topics
+{% endblock title %} 
 
-        <h3>Topic Name: {{ topic.name }} </h3>
-        <p> {{ topic.intro }} </p>
+
+{% block content %}
+<section class="container">
+    <div class="course_container">
+    <h1 class="course_heading">Tutorial Topics</h1>
+    <p class="border"><p>
+    {% for topic in topic_list %}
+        <h2 class="topic_title">{{ topic.name }} </h2>
+        <p class="topic_p"> {{ topic.intro }} </p>
 
     {% endfor %}
-    
     </div>
 </section>
+{% endblock content %}
