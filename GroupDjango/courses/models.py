@@ -25,7 +25,7 @@ class Topic(models.Model):
         return str
 
 class Content(models.Model):
-    topic = models.ForeignKey(Topic, on_delete= models.CASCADE, default=1)
+    topic = models.ForeignKey(Topic, on_delete= models.CASCADE, default=4)
     name = models.CharField(max_length=50, default="name here...")
     explanation = models.TextField(max_length=500, default="explanation here...")
     example = models.TextField(max_length=500, default="example here...")
