@@ -21,9 +21,16 @@
             <p> {{ course.howDescription }} </p>
             <br>
             <h4>Topics:</h4>
+
             {% for topic in object.topic_set.all %}
-                <p>-{{topic}}</p>
-            {% endfor %}
+
+                <h5>-{{topic.name}}</h5>
+
+                {% for content in topic.content_set.all %}
+                    <p>--{{content.name}}</p>
+                {% endfor content %}
+
+            {% endfor topic %}
 
         </div>
 
