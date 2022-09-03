@@ -1,0 +1,13 @@
+<section class="course_container">
+    <div class="container">
+    <h1>Topic List Page</h1>
+    
+    {% for topic in topic_list %}
+
+        <h3>Topic Name: {{ topic.name }} </h3>
+        <p> {{ topic.intro }} </p>
+
+    {% endfor %}
+    
+    </div>
+</section>

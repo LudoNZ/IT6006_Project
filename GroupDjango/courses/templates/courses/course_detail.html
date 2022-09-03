@@ -12,9 +12,24 @@
         
         <div>
             <h1>Course Name: {{ course.name }} </h1>
-            <span> {{ course.whatHeading }} </span><br>
-            <span> {{ course.whatDescription }} </span>
+            <p>price: {{ course.price }}</p>
+            <br>
+            <h4> {{ course.whatHeading }} </h4>
+            <p> {{ course.whatDescription }} </p>
+            <br>
+            <h4> {{ course.howHeading }} </h4>
+            <p> {{ course.howDescription }} </p>
+            <br>
+            <h4>Topics:</h4>
+            {% for topic in object.topic_set.all %}
+                <p>-{{topic}}</p>
+            {% endfor %}
+
         </div>
+
+        
+        <a href="{% url 'topic_list' %}">click link to topic list view</a>
+
         </div>
     </section>
 {% endblock content %}
