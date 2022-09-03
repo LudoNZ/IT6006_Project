@@ -8,7 +8,7 @@
         </a>
         <a id="menu" href="{% url 'home' %}">Home</a>
         <a id="menu" href="{% url 'about' %}">About</a>
-        <a id="menu" href="#">Tutorial</a>
+        <a id="menu" href="{% url 'course_list' %}">Course</a>
         <a id="menu" href="#">Q &amp; A</a>
 
         {% if user.is_authenticated %}

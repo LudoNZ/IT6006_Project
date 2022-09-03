@@ -2,41 +2,39 @@
 
 
 {% block title %} 
-    CourseDetail
+    Course Detail
 {% endblock title %} 
 
 
 {% block content %}
-    <section class="course_container">
-        <div class="container">
-        
-        <div>
-            <h1>Course Name: {{ course.name }} </h1>
-            <p>price: {{ course.price }}</p>
-            <br>
-            <h4> {{ course.whatHeading }} </h4>
-            <p> {{ course.whatDescription }} </p>
-            <br>
-            <h4> {{ course.howHeading }} </h4>
-            <p> {{ course.howDescription }} </p>
-            <br>
-            <h4>Topics:</h4>
+<section class="container">
+    <div class="course_container">
+        <h1 class="course_heading">{{ course.name }} </h1>
+        <p class="course_price">Price: $ {{ course.price }}</p>
+        <p class="border"><p>
 
-            {% for topic in object.topic_set.all %}
+        <h2 class="course_detail_title"> {{ course.whatHeading }} </h2>
+        <p class="course_detail_p"> {{ course.whatDescription }} </p>
+        <br>
+        <h2 class="course_detail_title"> {{ course.howHeading }} </h2>
+        <p class="course_detail_p"> {{ course.howDescription }} </p>
+        <br>
 
-                <h5>-{{topic.name}}</h5>
-
+        <h2 class="course_detail_title">Topics:</h2>
+        <div class="course_detail_flex">
+        {% for topic in object.topic_set.all %}
+            <div class="card">
+                <h3 class="topic_name">{{topic.name}}</h3>
                 {% for content in topic.content_set.all %}
-                    <p>--{{content.name}}</p>
+                    <p class="cont_name"><i class="fas fa-caret-right"></i> {{content.name}}</p>
                 {% endfor content %}
-
-            {% endfor topic %}
-
-        </div>
-
-        
-        <a href="{% url 'topic_list' %}">click link to topic list view</a>
-
-        </div>
-    </section>
+            </div>
+        {% endfor topic %}
+        <div> 
+        <button class="btn_topic_list">
+            <a href="{% url 'topic_list' %}">More about Topic</a>
+        </button>
+          
+    </div>
+</section>
 {% endblock content %}
