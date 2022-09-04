@@ -35,9 +35,9 @@ class Content(models.Model):
         str = self.topic.course.name + ", " + self.topic.name + ", " + self.name
         return str
 
-class Questions(models.Model):
+class Question(models.Model):
     content = models.ForeignKey(Content, on_delete= models.CASCADE)
-    question = models.CharField(max_length=50)
+    ask = models.CharField(max_length=50)
     answer = models.BooleanField()
 
     def __str__(self):
