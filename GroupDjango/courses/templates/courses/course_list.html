@@ -1,23 +1,39 @@
 {% extends "base.html" %} 
+
+
 {% block title %} 
     Course List 
 {% endblock title %}
+
 
 {% block content %}
 <section class="container">
     <div class="course_container">
     <h1 class="course_heading">Course List</h1>
-
+    <p class="border"><p>
     {% for course in course_list %}
-    <div class="card">
         <h2 class="course_title">
             <a href="{% url 'course_detail' course.pk %}">
                 {{ course.name }}
             </a>
             
         </h2>
-    </div>
+        
+        {% for enrolment in course.enrolment_set.all %}
+
+            {% if enrolment.user == user %}
+                <p> {{ enrolment }}</p>
+                <p> Grade: {{ enrolment.grade }} %</p>
+            {% endif %}
+                
+
+        {% endfor enrolment %}
+
     {% endfor %}
+
+
+    
+
     </div>
 </section>
 {% endblock content %}
