@@ -1,0 +1,189 @@
+/* About page - Top Section*/
+.about_top_container {
+    margin: 0;
+    background-color: #FFFFFF;
+}
+
+.about_top_h {
+    font-family: Quicksand, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    font-size: 3.8rem;
+    padding-top: 8rem;
+    padding-bottom: 1.5rem;
+    color: #9C62D1;
+    text-align: center;
+}
+
+.about_p_container {
+    font-family: Quicksand, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 60%;
+    font-size: 1.3rem;
+    text-align: center;
+    line-height: 1.7rem;
+    padding-bottom: 8rem;
+    color: #888888;
+}
+
+@media screen and (max-width: 1200px) {
+    .about_container {
+        display: flex;
+        flex-direction: column;
+        flex-direction: column-reverse;
+        padding: 0 10%;
+    }
+
+
+    .box_images {
+        width: 100%;
+        height: 25.5rem;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .about_top_h {
+        font-weight: 500;
+        font-size: 2.7rem;
+        padding-top: 8rem;
+        padding-bottom: 1.2rem;
+        text-align: center;
+    }
+}
+
+
+
+/* About page - Top Section */
+.about_container {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    margin: 1rem 0;
+    padding: 0 8%;
+    gap: 5%;
+}
+
+.about_middle_title {
+    padding-top: 3rem;
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 3rem;
+    color: #9C62D1;
+    padding-bottom: .5rem;
+}
+
+.about_images {
+    width: 40%;
+    margin-top: 2rem;
+    background-image: url("/static/images/learning_image.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media screen and (max-width: 1200px) {
+    .about_container {
+        display: flex;
+        flex-direction: column;
+        flex-direction: column-reverse;
+        padding: 0 10%;
+    }
+
+    .about_middle_title {
+        padding-top: 0;
+        font-size: 2rem;
+        font-weight: 300;
+        line-height: 2.5rem;
+        padding-bottom: 0;
+    }
+
+    .about_images {
+        width: 100%;
+        height: 25.5rem;
+    }
+}
+
+/* About page - Many benefits */
+#benefit_icon {
+    font-size: 4rem;
+    color: #9C62D1;
+}
+
+
+.about_points_title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    padding-bottom: .5rem;
+    color: #888888;
+}
+
+.about_points_flex {
+    width: 100%;
+    padding: 0 .5rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.about_point {
+    width: 30%;
+    text-align: center;
+    padding-top: 5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-bottom: 2rem;
+}
+
+.about_point_heading {
+    margin: 2rem 0 .5rem 0;
+    color: #888888;
+    font-family: Quicksand, Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    padding-bottom: .5rem;
+}
+
+.about_points_p {
+    font-size: 1rem;
+    line-height: 1.3rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .about_points_flex {
+        width: 100%;
+        padding: .5rem;
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .about_point {
+        width: 50%;
+        text-align: center;
+        padding-top: 8rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        margin-bottom: 2rem;
+    }
+
+}
+
+@media screen and (max-width: 750px) {
+    .about_points_flex {
+        width: 100%;
+        padding: .5rem;
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about_point {
+        width: 80%;
+        text-align: center;
+        padding-top: 8rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        margin-bottom: 2rem;
+    }
+
+}
