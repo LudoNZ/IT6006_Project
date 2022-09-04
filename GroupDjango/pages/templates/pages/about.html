@@ -65,7 +65,7 @@
     <section class="container">
         <div class="points_container">
           <h1 class="about_points_title">Build Your Own Pathway to<br>Become a Professional Developper</h1>
-          <p>GET IT PYTHON is a wonderful tool to help you study to achieve your goal.</p>
+          <p class="points_subtitle">GET IT PYTHON is a wonderful tool to help you study to achieve your goal.</p>
   
           <div class="about_points_flex">
             <div class="about_point">
@@ -117,7 +117,9 @@
                     nisi ut aliquip ex ea commodo consequat.</p>
             </div>
           </div>
-          <a href="#"></a><button class="point_button">Our Course</button></a>
+          <div class="about_points_btn_container">
+            <a href="{% url 'course_list' %}"><button class="about_point_button">Our Course</button></a>
+          </div>
         </div>
       </section>
 

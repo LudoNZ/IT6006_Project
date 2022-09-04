@@ -311,14 +311,15 @@ nav {
 .point {
     width: 30%;
     text-align: center;
-    padding-top: 9rem;
+    margin-top: 3rem;
+    padding-top: 7rem;
     padding-left: 2rem;
     padding-right: 2rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 
 .point_heading {
-    margin: 2rem 0 .5rem 0;
+    margin: 0 0 .4rem 0;
     color: #888888;
     font-family: Quicksand, Arial, Helvetica, sans-serif;
     font-weight: 600;
@@ -366,6 +367,7 @@ nav {
     color: #F38F36;
     background-color: #FFFFFF;
 }
+
 
 @media screen and (max-width: 1000px) {
     .points_flex {
