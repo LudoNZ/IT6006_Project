@@ -20,7 +20,7 @@
               veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
           </div>
           <div class="top_btn_container">
-            <a href="#"></a><button class="top_button">About Us</button></a>
+            <a href="{% url 'about' %}"><button class="top_button">About Us</button></a>
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@
           <p class="ad_p">“Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
             doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
             veritatis et quasi architecto beatae vitae dicta sunt explicabo.” </p>
-          <button class="ad_button">Get Started</button>
+            <a href="{% url 'course_list' %}"><button class="ad_button">Get Started</button></a>
         </div>
         <div class="box_images"></div>
       </div>
@@ -59,11 +59,11 @@
               sed do eiusmod.</p>
           </div>
           <div class=" point" id="point3">
-            <h2 class="point_heading">Job Surports</h2>
+            <h2 class="point_heading">Job Support</h2>
             <p class="points_p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </div>
         </div>
-        <a href="#"></a><button class="point_button">Our Course</button></a>
+        <a href="{% url 'course_list' %}"><button class="point_button">Our Course</button></a>
       </div>
     </section>
 
