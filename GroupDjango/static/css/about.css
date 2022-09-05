@@ -114,6 +114,11 @@
     color: #888888;
 }
 
+.points_subtitle {
+    font-size: 1.2rem;
+    padding-top: 1rem;
+}
+
 .about_points_flex {
     width: 100%;
     padding: 0 .5rem;
@@ -144,6 +149,29 @@
 .about_points_p {
     font-size: 1rem;
     line-height: 1.3rem;
+}
+
+.about_points_btn_container {
+    padding-top: 2rem;
+}
+
+.about_point_button {
+    width: 8rem;
+    height: 2.5rem;
+    font-size: 1.1rem;
+    display: inline-block;
+    background-color: #F38F36;
+    color: #FFFFFF;
+    line-height: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.about_point_button:hover {
+    border: 1px solid #F38F36;
+    color: #F38F36;
+    background-color: #FFFFFF;
 }
 
 @media screen and (max-width: 1200px) {
