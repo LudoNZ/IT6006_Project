@@ -114,21 +114,6 @@ nav {
 }
 
 @media screen and (max-width: 950px) {
-    nav {
-        padding: 0;
-    }
-
-    .topnav a:not(:first-child) {
-        display: none;
-    }
-
-    .topnav a.icon {
-        float: right;
-        display: block;
-    }
-}
-
-@media screen and (max-width: 950px) {
     .topnav.responsive {
         position: relative;
     }
@@ -145,6 +130,56 @@ nav {
         text-align: left;
     }
 }
+
+
+/* Course NAVBAR STYLING */
+.course_nav_container {
+    background-color:
+        #861bbf;
+    margin: 0;
+}
+
+.course_topnav {
+    overflow: hidden;
+
+}
+
+.course_topnav a {
+    float: left;
+    display: block;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 0 15px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.course_topnav a:hover {
+    display: block;
+    color: #F38F36;
+}
+
+#c_menu {
+    margin: 1rem 0;
+}
+
+
+
+@media screen and (max-width: 950px) {
+    nav {
+        padding: 0;
+    }
+
+    .topnav a:not(:first-child) {
+        display: none;
+    }
+
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+}
+
 
 /* Top image*/
 .top_container {
