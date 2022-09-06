@@ -18,7 +18,22 @@
             </a>
             
         </h2>
+        
+        {% for enrolment in course.enrolment_set.all %}
+
+            {% if enrolment.user == user %}
+                <p> {{ enrolment }}</p>
+                <p> Grade: {{ enrolment.grade }} %</p>
+            {% endif %}
+                
+
+        {% endfor enrolment %}
+
     {% endfor %}
+
+
+    
+
     </div>
 </section>
 {% endblock content %}
