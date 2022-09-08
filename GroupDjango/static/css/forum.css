@@ -1,0 +1,21 @@
+.forum_container {
+    padding: 3rem 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.forum_heading {
+    color: #666666;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.forum_btn {
+    display: block;
+    padding: .8rem;
+    color: #FFFFFF;
+    background-color: #9C62D1;
+    margin: 2rem 0 3rem 0;
+    float: right;
+}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="forum_container">
+        <h1 class="forum_heading">Q &amp; A Forum </h1>
+        <div class="row">
+            {% block preforum %}{% endblock %}
+            {% block forum_content %}{% endblock %}
+            {% block post_content %}{% endblock %}
+        </div>
+    <div>
+</div>
+
+{% endblock %}

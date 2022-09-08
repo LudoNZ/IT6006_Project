@@ -1,0 +1,47 @@
+{% extends 'forums/forum_base.html' %}
+ 
+{% block preforum %}
+    <h1>{{ forum.name }}</h1>
+    <div class="content">
+        {% if user.is_authenticated %}
+            <h3>You are login as 
+                    {{user.username}}
+                </a>
+            </h3>
+        {% endif %}
+    </div>    
+{% endblock %}
+
+
+{% block forum_content %}
+    <div class="container">
+        <div class="card">
+            <h3>{{forum.title}}</h3>
+            <p>Date of issue: {{forum.created_at}}</p>
+            <p>Detail: {{forum.description}}</p>
+            <p>The Questioner: {{forum.user}}</p>
+            <p>Is the issue closed?: {{forum.is_closed}}</p>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block post_content %}
+    <br>
+    <div="container">
+        <h1>Ansers</h1>
+        <p>No comment!</p>
+
+        {% if user.is_authenticated %}
+        <a href="{% url 'forums:createpost' %}" class='btn'>
+            <button>Post a comment!</button>
+        </a>
+        {% endif %}
+
+        <div class=" col-md-8">
+            {% for post in post_list %}
+            <h3>{{post.message}}</h3>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
