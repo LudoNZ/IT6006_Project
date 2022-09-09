@@ -27,7 +27,6 @@ class Forum(models.Model):
     category = models.ForeignKey(
         Category, related_name="categories", on_delete=models.CASCADE)
     description = models.TextField(blank=True, default='')
-    description_html = models.TextField(editable=False, default='', blank=True)
     created_at = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now=True)
     is_closed = models.BooleanField(default=False)
@@ -42,21 +41,20 @@ class Forum(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("forums:single", kwargs={"slug": self.slug})
+        return reverse("forums:single", kwargs={"pk": self.pk})
 
     class Meta:
         ordering = ["title"]
 
 
-class Post(models.Model):
-    user = models.ForeignKey(User, related_name='posts',
+class Comment(models.Model):
+    user = models.ForeignKey(User, related_name='Comments',
                              on_delete=models.CASCADE)
     forum = models.ForeignKey(
-        Forum, related_name='posts', null=True, blank=True, on_delete=models.CASCADE)
+        Forum, related_name='comments', null=True, blank=True, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now=True)
     message = models.TextField()
-    message_html = models.TextField(editable=False)
 
     def __str__(self):
         return self.message
@@ -65,8 +63,7 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('posts:single', kwargs={'forum': self.posts.forum, 'pk': self.pk})
+        return reverse("forums:single", kwargs={"pk": self.pk})
 
     class Meta:
-        ordering = ['-created_at']
-        unique_together = ['user', 'message']
+        ordering = ['created_at']

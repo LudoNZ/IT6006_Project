@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 
 # Create your views here.
@@ -6,8 +6,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
 from django.http import Http404
 from django.views import generic
-from forums.models import Forum, Category, Post
+from forums.models import Forum, Category, Comment
+from forums.forms import CommentForm
 from braces.views import SelectRelatedMixin
+
+
+from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class CreateForum(LoginRequiredMixin, generic.CreateView):
@@ -21,22 +28,18 @@ class CreateForum(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
 
+class UpdateForum(LoginRequiredMixin, generic.UpdateView):
+    model = Forum
+    fields = ('title', 'category', 'description')
+
+
 class SingleForum(generic.DetailView):
     model = Forum
 
-    # def get_queryset(self):
-    #     try:
-    #         self.post_forum = Forum.objects.prefetch_related('posts').get(
-    #             title__iexact=self.kwargs.get('forum'))
-    #     except Forum.DoesNotExist:
-    #         raise Http404
-    #     else:
-    #         return self.post_forum.posts.all()
-
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['post_forum'] = self.post_forum
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = Category.objects.all()
+        return context
 
 
 class ListForums(generic.ListView):
@@ -48,62 +51,38 @@ class ListForums(generic.ListView):
         return context
 
 
-# From post
+######################################################################################################
 
-class PostList(SelectRelatedMixin, generic.ListView):
-    model = Post
-    select_related = ('user', 'forum')
+######################################################################################################
 
 
-class UserPosts(generic.ListView):
-    model = Post
-    template_name = 'posts/user_post_list.html'
-
-    def get_queryset(self):
-        try:
-            self.post_user = User.objects.prefetch_related('posts').get(
-                username__iexact=self.kwargs.get('username'))
-        except User.DoesNotExist:
-            raise Http404
-        else:
-            return self.post_user.posts.all()
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['post_user'] = self.post_user
-        return context
+@login_required
+def add_comment_to_post(request, pk):
+    forum = get_object_or_404(Forum, pk=pk)
+    user = request.user
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.forum = forum
+            comment.user = user
+            comment.save()
+            return redirect('forums:single', pk=forum.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'forums/comment_form.html', {'form': form})
 
 
-class PostDetail(SelectRelatedMixin, generic.DetailView):
-    model = Post
-    select_related = ('user', 'forum')
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(user__username__iexact=self.kwargs.get('username'))
+@login_required
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    return redirect('post_detail', pk=comment.post.pk)
 
 
-class CreatePost(LoginRequiredMixin, SelectRelatedMixin, generic.CreateView):
-    fields = ('message',)
-    model = Post
-
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.user = self.request.user
-        self.object.forum = self.request.forum
-        self.object.save()
-        return super().form_valid(form)
-
-
-class DeletePost(LoginRequiredMixin, SelectRelatedMixin, generic.DeleteView):
-    model = Post
-    select_related = ('user', 'forum')
-    success_url = reverse_lazy('posts:all')
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(user_id=self.request.user.id)
-
-    def delete(self, *args, **kwargs):
-        messages.success(self.request, 'Post Deleted')
-        return super().delete(*args, **kwargs)
+@login_required
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    post_pk = comment.post.pk
+    comment.delete()
+    return redirect('post_detail', pk=post.pk)
