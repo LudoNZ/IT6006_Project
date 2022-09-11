@@ -9,6 +9,16 @@
 {% block content %}
 <section class="container">
     <div class="course_container">
+    {% if user.is_authenticated %}
+        {% for group in user.groups.all %}
+            {% ifequal group.name 'Developer' %}
+                <div style="margin-bottom:20px;">
+                    <h1 class="course_heading">Developer Options</h1>
+                    <h2 class="course_title"><a href="{% url 'course_new' %}">Add New Course</a></h2>
+                </div>
+            {% endifequal %}
+        {%endfor%}
+    {% endif %}
     <h1 class="course_heading">Course List</h1>
     <p class="border"><p>
     {% for course in course_list %}

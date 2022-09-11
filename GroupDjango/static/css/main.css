@@ -9,6 +9,13 @@ body {
     font-family: Roboto, Arial, Helvetica, sans-serif;
 }
 
+h3 {
+    font-size: 35px;
+}
+h4 {
+    font-size: 30px;
+}
+
 a {
     text-decoration: none;
 }
