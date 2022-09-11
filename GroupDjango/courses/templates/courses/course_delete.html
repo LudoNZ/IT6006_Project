@@ -1,0 +1,15 @@
+{% extends "base.html" %} {%block content %}
+
+<section class="container">
+    <div class="course_container">
+        <h1>Edit Course</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <p>Are you sure you want to delete "{{ course.name }}"?</p>
+            <input type="submit" value="Confirm">
+        </form>
+    </div>
+</section>
+
+{% endblock content %}
+
