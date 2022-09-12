@@ -1,0 +1,81 @@
+{% extends 'forums/forum_base.html' %}
+
+{% block forum_header %}
+    <div class="forum_container">
+        <div class="container">
+            <div class="forum_header_container">
+                <div>
+                    <h1 class="forum_heading">We are here to help!</h1>
+
+                    <p class="forum_header_p">This Q&amp;A forum is a great place to share your problem and <br>
+                        tacles togather for finding the solution.<br>
+                        Search a solution or post your problem here.
+                    </p>
+                </div>
+                <div>
+                    <form class="forum_search" action="/action_page.php">
+                        <input type="text" name="search">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                
+                    {% if user.is_authenticated %}
+                    <div>
+                        <a class="forum_btn" href="{% url 'forums:create' %}" class='btn btn-md btn-fill btn-warning'>
+                            Post New Question</a>
+                    </div>
+                    {% endif %}         
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block preforum %}
+    <nav  class="forum_navbar">
+        <ul>
+            <li><a id="active" href="#">Recent Questions</a></li>
+            <li><a href="#">Most Responses</a></li>
+            <li><a href="#">Un Solved</a></li>
+            <li><a href="#">Your page</a></li>
+          </ul>
+    </nav>
+{% endblock %}
+
+
+{% block forum_content %}
+    <div>
+        {% for forum in forum_list %}
+        <div class="card_forum">
+            
+            <h2 class="forum_list_title">
+                <a class='list' href="{% url 'forums:single' pk=forum.pk %}">{{forum.title}}</a></h2>
+            <p class="form_list_text">{{forum.description|truncatewords:50}}</p>
+            <hr>
+            <div class="forum_list_detail">
+                <span id="tag">{{forum.category}}</span>
+                <span><i class="fas fa-user"></i> {{forum.user}}</span>
+                <span><i class="far fa-clock"></i> {{forum.created_at}}</span>
+                <span><i class="far fa-comments"></i> 7</span>
+                {% if forum.is_closed == True %}
+                    <span><i class="fas fa-check" style="color:green;"></i> Solved</span>            
+                {% else %}
+                    <span><i class="far fa-frown-open"></i> Unsolved</span>
+                {% endif %}     
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block category %}
+    <div class="card_forum">
+        <h3 class="forum_cat_title">Category</h3>
+        <hr>
+        <div class="forum_cat_list_container">
+            {% for c in category %}
+            <a class="forum_cat_box" href="#">{{c.name}} &#40; 5 &#41;</a>
+            {% endfor %}
+        </div>
+    <div>
+{% endblock %}

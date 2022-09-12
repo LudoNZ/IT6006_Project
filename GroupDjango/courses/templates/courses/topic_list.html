@@ -7,13 +7,32 @@
 {% block content %}
 <section class="container">
     <div class="course_container">
-    <h1 class="course_heading">Tutorial Topics</h1>
+    {% if user.is_authenticated %}
+        {% for group in user.groups.all %}
+            {% if group.name == "Developer" %}
+                <div style="margin-bottom:20px;">
+                    <h1 class="course_heading">Developer Options</h1>
+                    <h2 class="course_title"><a href="{% url 'course_new' %}">Add New Topic</a></h2>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    
+    <h1 class="course_heading">Tutorial Topics {{course.name}}</h1>
     <p class="border"><p>
-    {% for topic in topic_list %}
+
+    <!-- {% for topic in course.topic_set.all %}
         <h2 class="topic_title">{{ topic.name }} </h2>
         <p class="topic_p"> {{ topic.intro }} </p>
+    {% endfor topic %} -->
+    
+    <!-- {% for topic in topic_list %}
+        {% ifequal topic.course.name 'HTML' %}
+            <h2 class="topic_title">{{ topic.name }} </h2>
+            <p class="topic_p"> {{ topic.intro }} </p>
+        {% endifequal %}
+    {% endfor %} -->
 
-    {% endfor %}
     </div>
 </section>
 {% endblock content %}

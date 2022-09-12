@@ -9,7 +9,7 @@
         <a id="menu" href="{% url 'home' %}">Home</a>
         <a id="menu" href="{% url 'about' %}">About</a>
         <a id="menu" href="{% url 'course_list' %}">Course</a>
-        <a id="menu" href="#">Q &amp; A</a>
+        <a id="menu" href="{% url 'forums:all' %}">Q &amp; A</a>
 
         {% if user.is_authenticated %}
             <a id="right" href="{% url 'logout' %}"><div class="navbutton">Logout <i class="fas fa-sign-out-alt"></i></div></a>
