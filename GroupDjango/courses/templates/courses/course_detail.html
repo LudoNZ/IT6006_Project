@@ -11,13 +11,13 @@
     <div class="course_container">
         {% if user.is_authenticated %}
             {% for group in user.groups.all %}
-                {% ifequal group.name 'Developer' %}
+                {% if group.name == "Developer" %}
                     <div style="margin-bottom:20px;">
                         <h1 class="course_heading">Developer Options</h1>
                         <h2 class="course_title"><a href="{% url 'course_edit' course.pk %}">Edit Course</a></h2>
                         <h2 class="course_title"><a href="{% url 'course_delete' course.pk %}">Delete Course</a></h2>
                     </div>
-                {% endifequal %}
+                {% endif %}
             {%endfor%}
         {% endif %}
 
