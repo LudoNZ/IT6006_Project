@@ -44,7 +44,7 @@ class Forum(models.Model):
         return reverse("forums:single", kwargs={"pk": self.pk})
 
     class Meta:
-        ordering = ["title"]
+        ordering = ["-created_at"]
 
 
 class Comment(models.Model):

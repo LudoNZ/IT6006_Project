@@ -1,0 +1,78 @@
+{% extends 'forums/forum_base.html' %}
+
+{% block forum_header %}
+    {% include "forums/_forum_simple_header.html" %}
+{% endblock %}
+
+
+{% block preforum %}
+    <nav  class="forum_navbar">
+        <ul>
+            <li><a href="{% url 'forums:all' %}">Recent Questions</a></li>
+            <li><a href="#">Most Responses</a></li>
+            <li><a href="{% url 'forums:selected_unsolved' %}">Un Solved</a></li>
+            <li><a id="active" href="{% url 'forums:selected_user' user.username %}">Your List</a></li>
+          </ul>
+    </nav>
+{% endblock %}
+
+
+{% block forum_content %}
+    <div>
+        {% for forum in forum_list %}
+        <div class="card_forum">
+            
+            <h2 class="forum_list_title">
+                <a class='list' href="{% url 'forums:single' pk=forum.pk %}">{{forum.title}}</a></h2>
+            <p class="form_list_text">{{forum.description|truncatewords:50}}</p>
+            <hr>
+            <div class="forum_list_detail">
+                <span id="tag">{{forum.category}}</span>
+                <span><i class="fas fa-user"></i> {{forum.user}}</span>
+                <span><i class="far fa-clock"></i> {{forum.created_at}}</span>
+                <span><i class="far fa-comments"></i> 7</span>
+                {% if forum.is_closed == True %}
+                    <span><i class="fas fa-check" style="color:green;"></i> Solved</span>            
+                {% else %}
+                    <span><i class="far fa-frown-open"></i> Unsolved</span>
+                {% endif %}     
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block category %}
+<div>
+    <div class="card_forum">
+        {% if user.is_authenticated %}
+            <h3 class="forum_cat_title">Hi {{ user.username }}!</h3>
+            <hr>
+            <div class="forum_cat_list_container">
+                <a class="forum_user_box" href="{% url 'forums:create' %}">
+                    <i class="fas fa-edit"></i> Post New Question</a>
+                <a class="forum_user_box" href="{% url 'forums:selected_user' user.username %}">Your Post List</a>
+                <a class="forum_user_box" href="#">Your Comment List</a>
+            </div>
+        {% else %}
+        <h3 class="forum_cat_title">Search area</h3>
+        <hr>
+        <br>            
+        {% endif %}
+        
+        <form class="forum_search_right" action="#">
+            <input type="text" name="search"><button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
+    <div class="card_forum">
+        <h3 class="forum_cat_title">Category</h3>
+        <hr>
+        <div class="forum_cat_list_container">
+            {% for c in category %}
+            <a class="forum_cat_box" href="#">{{c.name}} &#40; 5 &#41;</a>
+            {% endfor %}
+        </div>
+    <div>
+</div>
+{% endblock %}
