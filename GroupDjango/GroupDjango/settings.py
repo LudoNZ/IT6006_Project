@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'accounts.apps.AccountsConfig',
     'courses',
-    'enrolment'
+    'enrolment',
+    'forums',
 ]
 
 MIDDLEWARE = [
