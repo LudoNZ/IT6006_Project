@@ -1,4 +1,7 @@
 {% extends 'forums/forum_base.html' %}
+{% block forum_header %}
+    {% include "forums/_forum_simple_header.html" %}
+{% endblock %}
 
 {% block forum_content %}
     <div class="card_forum_detail">
@@ -9,13 +12,21 @@
             <span id="tag">{{forum.category}}</span>
             <span><i class="fas fa-user"></i> {{forum.user}}</span>
             <span><i class="far fa-clock"></i> {{forum.created_at}}</span>
-            <span><i class="far fa-comments"></i> 7</span>
+            <span><i class="far fa-comments"></i> 5 </span>
             {% if forum.is_closed != true %}
                 <span><i class="far fa-frown-open"></i> Unsolved</span>
             {% else %}
                 <span><i class="fas fa-check" style="color:#F5C03B;"></i> Solved</span>
             {% endif %}         
         </div>
+
+        {% if forum.user|stringformat:'s' == user.get_username|stringformat:'s'  %}
+            <div>
+                <a href="{% url 'forums:update' pk=forum.pk %}" class='add_coment'>
+                    <i class="fas fa-edit" id="purple"></i> Update the post</a><br>
+            </div>
+        {% endif %} 
+
     </div>
 {% endblock %}
 
@@ -26,34 +37,63 @@
             <div><h2 class="forum_list_title">Comments</h2></div>
             {% if user.is_authenticated %}
                 <div>
-                    <a href="{% url 'forums:add_comment_to_post' pk=forum.pk %}" class='add_coment'><i class="fas fa-plus-circle"></i> Post a Comment</a><br>
+                    <a href="{% url 'forums:add_comment_to_post' pk=forum.pk %}" class='add_coment'>
+                        <i class="fas fa-plus-circle" id="orange"></i> Post a Comment</a><br>
                 </div>
             {% endif %}
         </div>
         <hr>
-        <p class="form_list_text">No comment!</p>
+        {% if comment|length == 0 %}
+            <p class="form_list_text_no_comment">No comment!</p>
+        {% endif %}
 
         {% for comment in forum.comments.all %}
-        <div class="forum_comment_detail">
-            <p class="form_list_text">{{ comment.message }}</p>
+            <div class="forum_comment_detail">
+                <p class="form_list_text">{{ comment.message }}</p>
 
-            <span><i class="fas fa-user"></i> {{ comment.user }}</span>
-            <span><i class="far fa-clock"></i> {{ comment.created_at }}</span>
-        </div>
-        <hr>
+                <span><i class="fas fa-user"></i> {{ comment.user }}</span>
+                <span><i class="far fa-clock"></i> {{ comment.created_at }}</span>
+                {% if comment.user|stringformat:'s' == user.get_username|stringformat:'s' %}
+                <a class="comment_delete" href="{% url 'forums:comment_remove' pk=comment.pk %}">
+                    <i class="fas fa-trash-alt"></i> Delete</a>
+                {% endif %}
+            </div>
+            <hr class="coment_line">
         {% endfor %}
     </div>
 {% endblock %}
 
-
 {% block category %}
-    <div class="card_forum_detail">
+<div>
+    <div class="card_forum_detail_search">
+        {% if user.is_authenticated %}
+            <h3 class="forum_cat_title">Hi {{ user.username }}!</h3>
+            <hr>
+            <div class="forum_cat_list_container">
+                <a class="forum_user_box" href="{% url 'forums:create' %}">
+                    <i class="fas fa-edit"></i> Post New Question</a>
+                <a class="forum_user_box" href="{% url 'forums:selected_user' user.username %}">Your Post List</a>
+                <a class="forum_user_box" href="#">Your Comment List</a>
+            </div>
+        {% else %}
+        <h3 class="forum_cat_title">Search</h3>
+        <hr>
+        <br>            
+        {% endif %}
+        
+        <form class="forum_search_right" action="#">
+            <input type="text" name="search"><button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div>
+
+    <div class="card_forum">
         <h3 class="forum_cat_title">Category</h3>
         <hr>
         <div class="forum_cat_list_container">
             {% for c in category %}
-            <a class="forum_cat_box" href="#">{{c.name}} &#40; 5 &#41;</a>
+            <a class="forum_cat_box" href="#">{{c.name}} &#40; 7 &#41;</a>
             {% endfor %}
         </div>
     <div>
+</div>
 {% endblock %}

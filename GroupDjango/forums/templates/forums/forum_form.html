@@ -1,10 +1,20 @@
 {% extends "forums/forum_base.html" %}
+{% block forum_header %}
+    {% include "forums/_forum_simple_header.html" %}
+{% endblock %}
 
 {% block forum_content %}
-<h4>Post a new question</h4>
-<form action="{% url 'forums:create' %}" method="post" id='forumForm'>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" class='btn' value="Create">
-</form>
+    <h1 class="forum_form_title">
+        {% if not forum.pk %}
+            Post a new question
+        {% else%}
+            Update forum
+        {% endif %}
+    </h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class='form_submit_button'>Submit</button>
+    </form>
 {% endblock %}

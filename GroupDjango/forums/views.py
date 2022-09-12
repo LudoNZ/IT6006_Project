@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from django.db.models import Count
 
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -30,7 +31,7 @@ class CreateForum(LoginRequiredMixin, generic.CreateView):
 
 class UpdateForum(LoginRequiredMixin, generic.UpdateView):
     model = Forum
-    fields = ('title', 'category', 'description')
+    fields = ('title', 'description', 'is_closed')
 
 
 class SingleForum(generic.DetailView):
@@ -41,9 +42,47 @@ class SingleForum(generic.DetailView):
         context['category'] = Category.objects.all()
         return context
 
+    def get_comment_count(self):
+        comment_counter = Commnet.object.annotate(count('forum'))
+        comment_count = comment_counter[self]
+        return comment_count
+
 
 class ListForums(generic.ListView):
     model = Forum
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = Category.objects.all()
+        return context
+
+
+class ListSelectedUserForums(generic.ListView):
+    model = Forum
+    template_name = 'forums/forum_list_selected_user.html'
+
+    def get_queryset(self):
+        try:
+            self.post_user = User.objects.prefetch_related("forums").get(
+                username__iexact=self.kwargs.get("user")
+            )
+        except User.DoesNotExist:
+            raise Http404
+        else:
+            return self.post_user.forums.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = Category.objects.all()
+        return context
+
+
+class ListSelectedUnsolvedForums(generic.ListView):
+    model = Forum
+    template_name = 'forums/forum_list_selected_unsolve.html'
+
+    def get_queryset(self):
+        return Forum.objects.filter(is_closed='False')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -74,15 +113,8 @@ def add_comment_to_post(request, pk):
 
 
 @login_required
-def comment_approve(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    comment.approve()
-    return redirect('post_detail', pk=comment.post.pk)
-
-
-@login_required
 def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
-    post_pk = comment.post.pk
+    forum_pk = comment.forum.pk
     comment.delete()
-    return redirect('post_detail', pk=post.pk)
+    return redirect('forums:single', pk=forum_pk)
