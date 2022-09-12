@@ -36,7 +36,7 @@
 
         <h2 class="course_detail_title">{{ course.name }} Topics:</h2>
         <div class="course_detail_flex">
-        {% for topic in object.topic_set.all %}
+        {% for topic in course.topic_set.all %}
             <div class="card">
                 <h3 class="topic_name">{{topic.name}}</h3>
                 {% for content in topic.content_set.all %}
@@ -46,7 +46,7 @@
         {% endfor topic %}
         <div> 
         <button class="btn_topic_list">
-            <a href="{% url 'topic_list' course.name %}?name=python">More about Topics</a>
+            <a href="{% url 'topic_list' course.id %}">More about Topics</a>
         </button>
           
     </div>

@@ -39,14 +39,17 @@ class CourseDeleteDetailView(LoginRequiredMixin, PermissionRequiredMixin, Delete
 
 
 class TopicListView(ListView):
-    model = Topic
+    model = Course
     template_name = "courses/topic_list.html"
-    
+
+    # def get_queryset(self):
+    #     return Topic.objects.all()
+
     # def get_object(self, queryset=None):
     #     return queryset.get(slug=self.slug)
 
-    # def showmessage(request, msg):
-    #     return render(request, 'courses/topic_list.html', {'msg' : msg})
+# def showmessage(request, msg):
+#     return render(request, 'courses/topic_list.html', {'msg' : msg})
 
 
 
