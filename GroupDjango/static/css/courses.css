@@ -1,7 +1,6 @@
 .course_container {
-    padding: 3rem 5rem;
+    padding: 3rem 3rem;
     margin-bottom: 1.5rem;
-    background-color: #eeeeee;
 }
 
 @media screen and (max-width: 1200px) {
@@ -14,6 +13,7 @@
     }
 }
 
+
 .course_heading {
     color: #666666;
     font-family: Roboto, Arial, Helvetica, sans-serif;
@@ -25,6 +25,8 @@
 .course_heading_left {
     justify-content: flex-end;
 }
+
+
 
 /*Course List Page*/
 .course_title {
@@ -59,12 +61,33 @@
     padding: 1rem 1rem 2rem 1rem;
 }
 
+
+
+
 /* Course Detail Page*/
+
+
+.course_detail_container {
+    display: flex;
+    flex-direction: row;
+    padding: 3rem 0;
+    margin-bottom: 1.5rem;
+    gap: 3%;
+}
+
+.course_content {
+    width: 72%;
+}
+
+.course_menu {
+    width: 30%;
+}
+
 .course_price {
     font-family: Roboto, Arial, Helvetica, sans-serif;
     font-weight: 500;
     font-size: 1rem;
-    color: #888888;
+    color: #666666;
     float: right;
     padding-top: 1rem;
 }
@@ -74,28 +97,21 @@
     font-weight: 600;
     font-size: 1.3rem;
     padding: .5rem 0 .5rem 1.5rem;
-    color: #9C62D1;
+    color: #666666;
 }
 
 .course_detail_p {
-    color: #444444;
+    color: #888888;
     font-size: .9rem;
     line-height: 1.4rem;
     padding: 0 5rem;
 }
 
-.course_detail_flex {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
-    width: 400px;
-    margin: 1rem;
-    padding: 1rem 1rem 2rem 1rem;
+    margin: .5rem;
+    padding-bottom: 1rem;
 }
 
 
@@ -110,10 +126,11 @@
 }
 
 .cont_name {
-    color: #444444;
+    color: #666666;
     font-size: 1rem;
     line-height: 2.5rem;
     padding: 0 3rem;
+    display: block;
 }
 
 .btn_topic_list {
@@ -135,7 +152,6 @@
     }
 
     .card {
-        width: 450px;
         margin: 1rem 0 2rem 0;
         padding: 3rem;
     }
