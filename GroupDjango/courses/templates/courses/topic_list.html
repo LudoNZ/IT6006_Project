@@ -3,7 +3,6 @@
     Topics
 {% endblock title %} 
 
-
 {% block content %}
 <section class="container">
     <div class="course_container">
@@ -17,22 +16,15 @@
             {% endif %}
         {% endfor %}
     {% endif %}
-    
-    <h1 class="course_heading">Tutorial Topics {{course.name}}</h1>
+
+    <h1 class="course_heading">{{course.name}} Topics</h1>
     <p class="border"><p>
 
-    <!-- {% for topic in course.topic_set.all %}
+    {% for topic in course.topic_set.all %}
         <h2 class="topic_title">{{ topic.name }} </h2>
         <p class="topic_p"> {{ topic.intro }} </p>
-    {% endfor topic %} -->
+    {% endfor topic %}
     
-    <!-- {% for topic in topic_list %}
-        {% ifequal topic.course.name 'HTML' %}
-            <h2 class="topic_title">{{ topic.name }} </h2>
-            <p class="topic_p"> {{ topic.intro }} </p>
-        {% endifequal %}
-    {% endfor %} -->
-
     </div>
 </section>
 {% endblock content %}
