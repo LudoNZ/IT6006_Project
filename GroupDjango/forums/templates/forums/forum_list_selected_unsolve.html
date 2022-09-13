@@ -10,8 +10,10 @@
         <ul>
             <li><a href="{% url 'forums:all' %}">Recent Questions</a></li>
             <li><a href="#">Most Responses</a></li>
-            <li><a id="active" href="#">Un Solved</a></li>
-            <li><a href="{% url 'forums:selected_user' user.username %}">Your List</a></li>
+            <li><a id="active" href="{% url 'forums:selected_unsolved' %}">Un Solved</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'forums:selected_user' user.username %}">Your List</a></li>
+            {% endif %}
           </ul>
     </nav>
 {% endblock %}
