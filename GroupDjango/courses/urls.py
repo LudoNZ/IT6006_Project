@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import *
-from .views import CourseNewDetailView, CourseEditDetailView, CourseDeleteDetailView, TopicNewDetailView, DeveloperPageView, TopicEditDetailView, TopicDeleteDetailView, ContentNewDetailView
+from .views import CourseNewDetailView, CourseEditDetailView, CourseDeleteDetailView, TopicNewDetailView, DeveloperPageView, TopicEditDetailView, TopicDeleteDetailView, ContentNewDetailView, ContentDetailView
 
 urlpatterns = [
     path('courses/developer/', DeveloperPageView.as_view(), name="developer"), 
@@ -15,5 +15,6 @@ urlpatterns = [
     path('courses/topic/edit/<int:pk>', TopicEditDetailView.as_view(), name="topic_edit"),
     path('courses/topic/delete/<int:pk>', TopicDeleteDetailView.as_view(), name="topic_delete"), 
     path("courses/topic/content/new", ContentNewDetailView.as_view(), name="content_add"),
+    path("courses/topic/content/<int:pk>", ContentDetailView.as_view(), name="content_detail"),
 ]
 

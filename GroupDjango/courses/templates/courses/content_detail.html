@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+
+{% block title %} 
+    {{content.topic.course.name}}|{{content.topic.name}}|{{content.name}}
+{% endblock title %} 
+
+
+{% block content %}
+<section class="container">
+    <div class="course_container">
+        {% if user.is_authenticated %}
+            
+        {% endif %}
+
+        <div>
+            <h1 class="course_heading">{{ content.name }}</h1>
+            <p>expected time: {{ content.minutesToComplete }} min</p>
+        </div>
+        <br>
+            <p class="border">{{ content.explanation }}<p>
+                <p class="border">{{ content.example }}<p>
+        <div class="course_detail_flex">
+        {% for question in content.question_set.all %}
+        <p>{{ question.question }}</p>    
+        
+        <div class="card">
+                <div>
+                    <div style="float:right;">
+                        <a style="color:#9c62d1" href="#">
+                            Delete
+                        </a>
+                    </div>
+                    <div style="float:right;margin-right:10px;">
+                        <a style="color:#9c62d1" href="#">
+                            Edit
+                        </a>
+                    </div>
+                </div>
+                <a href="{% url 'content_detail' pk=content.id %}" type="button">
+                    <h3 class="topic_name">
+                        {{question.question}}
+                    </h3>
+                    <h3 class="topic_name">
+                        {{question.answer}}
+                    </h3>
+                </a>
+                
+                
+                
+            </div>
+        {% endfor question %}
+        <div> 
+        
+          
+    </div>
+</section>
+{% endblock content %}

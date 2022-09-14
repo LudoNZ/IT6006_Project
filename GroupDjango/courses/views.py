@@ -70,6 +70,10 @@ class TopicDeleteDetailView(LoginRequiredMixin, PermissionRequiredMixin, DeleteV
     template_name = "courses/topic_delete.html"
     success_url=reverse_lazy("courses")
 
+class ContentDetailView(DetailView):
+    model = Content
+    template_name = "courses/content_detail.html"
+
 class ContentNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ("courses.add_topics")
     model = Content
