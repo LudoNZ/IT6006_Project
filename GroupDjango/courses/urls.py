@@ -11,6 +11,7 @@ urlpatterns = [
     path("courses/<int:pk>/", CourseDetailView.as_view(), name="course_detail"),
     path("courses/topiclist/<int:pk>/", TopicListView.as_view(), name="topic_list"),
     path("courses/topiclist/add/", TopicNewDetailView.as_view(), name="topic_add"),
+    path("courses/topic/<int:pk>/", TopicDetailView.as_view(), name="topic_detail"),
     path('courses/topic/edit/<int:pk>', TopicEditDetailView.as_view(), name="topic_edit"),
     path('courses/topic/delete/<int:pk>', TopicDeleteDetailView.as_view(), name="topic_delete"), 
     path("courses/topic/content/new", ContentNewDetailView.as_view(), name="content_add"),

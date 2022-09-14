@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+
+{% block title %} 
+    Topic Detail
+{% endblock title %} 
+
+
+{% block content %}
+<section class="container">
+    <div class="course_container">
+        {% if user.is_authenticated %}
+            {% for group in user.groups.all %}
+                {% if group.name == "Developer" %}
+                    
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <div>
+            <h1 class="course_heading">{{ topic.name }}</h1>
+        </div>
+            <p class="border">{{ topic.intro }}<p>
+
+        <div class="course_detail_flex">
+        {% for content in topic.content_set.all %}
+            <div class="card">
+                <div>
+                    <div style="float:right;">
+                        <a style="color:#9c62d1" href="{% url 'topic_delete' topic.pk %}">
+                            Delete
+                        </a>
+                    </div>
+                    <div style="float:right;margin-right:10px;">
+                        <a style="color:#9c62d1" href="{% url 'topic_edit' topic.pk %}">
+                            Edit
+                        </a>
+                    </div>
+                </div>
+                <h3 class="topic_name">{{content.name}}</h3>
+                
+            </div>
+        {% endfor topic %}
+        <div> 
+        
+          
+    </div>
+</section>
+{% endblock content %}

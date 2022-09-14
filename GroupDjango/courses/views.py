@@ -53,6 +53,10 @@ class TopicNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView
     success_url="../../../courses/list/"
     fields =["course", "name", "intro"]
 
+class TopicDetailView(DetailView):
+    model = Topic
+    template_name = "courses/topic_detail.html"
+
 class TopicEditDetailView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ("courses.change_courses")
     model = Topic
