@@ -2,7 +2,7 @@
 
 <section class="container">
     <div class="course_container">
-        <h1>New Course</h1>
+        <h1>New Course</h1>    
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
@@ -10,5 +10,9 @@
         </form>
     </div>
 </section>
+
+<!-- <script>
+    document.getElementById('id_course').selectedIndex = {{topic.pk}};
+</script> -->
 
 {% endblock content %}

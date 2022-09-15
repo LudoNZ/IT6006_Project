@@ -12,6 +12,7 @@ body {
 h3 {
     font-size: 35px;
 }
+
 h4 {
     font-size: 30px;
 }
@@ -19,6 +20,15 @@ h4 {
 a {
     text-decoration: none;
 }
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
 
 li {
     list-style: none;
@@ -283,6 +293,7 @@ nav {
     line-height: 1rem;
     background-color: #9C62D1;
     margin-top: 1rem;
+    border-radius: 5px;
 }
 
 .ad_button:hover {
@@ -403,12 +414,17 @@ nav {
     margin-top: 1rem;
     text-align: center;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .point_button:hover {
     border: 1px solid #F38F36;
     color: #F38F36;
     background-color: #FFFFFF;
+}
+
+.point_button:active {
+    border: none;
 }
 
 

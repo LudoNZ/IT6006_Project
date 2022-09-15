@@ -1,0 +1,21 @@
+{% extends "base.html" %} 
+
+{% block title %} Home {% endblock title %}
+
+{%block content %}
+
+{% load static %}
+
+<!-- ########################## Contents ########################## -->
+<section class="container">
+    <div class="course_container">
+        <div style="margin-bottom:20px;">
+            <h1 class="course_heading">Developer Options</h1>
+            <h2 class="course_title"><a href="{% url 'course_new' %}">New Course</a></h2>
+            <h2 class="course_title"><a href="{% url 'topic_add' %}">New Topic</a></h2>
+            <h2 class="course_title"><a href="{% url 'content_add' %}">New Content</a></h2>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

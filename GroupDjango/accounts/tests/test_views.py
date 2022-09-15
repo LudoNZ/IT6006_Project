@@ -14,14 +14,3 @@ class TestViews(TestCase):
         response = self.client.get(reverse('login'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "registration/login.html")
-
-    def test_should_signup_user(self):
-        self.user = {
-            "username": "username",
-            "age": 10,
-            "password": "password",
-            "password2": "password",
-        }
-
-        response = self.client.post(reverse("signup"), self.user)
-        self.assertEqual(response.status_code, 200)

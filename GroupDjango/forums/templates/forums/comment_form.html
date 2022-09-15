@@ -1,4 +1,6 @@
 {% extends 'forums/forum_base.html' %}
+{% load crispy_forms_tags %}
+
 {% block forum_header %}
     {% include "forums/_forum_simple_header.html" %}
 {% endblock %}
@@ -7,7 +9,7 @@
     <h1 class="forum_form_title">New Comment<h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form|crispy }}
         <input type="submit" class='form_submit_button' value="Submit"></input>
     </form>
     <script>var editor = new MediumEditor('.editable');</script>

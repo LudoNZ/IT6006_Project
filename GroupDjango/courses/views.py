@@ -1,13 +1,18 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+import requests
+from django.views.generic import ListView, DetailView, TemplateView
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.urls import re_path
+from courses.forms import TopicNoteForm
 
-from .models import Course, Topic
+from .models import Course, Topic, Content
 
 # Create your views here.
+
+class DeveloperPageView(TemplateView):
+    template_name = "courses/developer.html"
 
 class CourseListView(ListView):
     model = Course
@@ -21,14 +26,14 @@ class CourseNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateVie
     permission_required = ("courses.add_courses")
     model = Course
     template_name = "courses/course_add.html"
-    success_url="courses/"
+    success_url="../../../courses/list/"
     fields =["name", "whatHeading", "whatDescription", "howHeading", "howDescription", "price"]
 
 class CourseEditDetailView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ("courses.change_courses")
     model = Course
     template_name = "courses/course_edit.html"
-    success_url="courses/"
+    success_url="../../../courses/list/"
     fields =["name", "whatHeading", "whatDescription", "howHeading", "howDescription", "price"]
 
 class CourseDeleteDetailView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
@@ -37,25 +42,41 @@ class CourseDeleteDetailView(LoginRequiredMixin, PermissionRequiredMixin, Delete
     template_name = "courses/course_delete.html"
     success_url=reverse_lazy("courses")
 
-
-class TopicListView(ListView):
+class TopicListView(DetailView):
     model = Course
     template_name = "courses/topic_list.html"
 
-    # def get_queryset(self):
-    #     return Topic.objects.all()
+class TopicNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    permission_required = ("courses.add_topics")
+    model = Topic
+    template_name = "courses/topic_add.html"
+    success_url="../../../courses/list/"
+    fields =["course", "name", "intro"]
 
-    # def get_object(self, queryset=None):
-    #     return queryset.get(slug=self.slug)
+class TopicDetailView(DetailView):
+    model = Topic
+    template_name = "courses/topic_detail.html"
 
-# def showmessage(request, msg):
-#     return render(request, 'courses/topic_list.html', {'msg' : msg})
+class TopicEditDetailView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    permission_required = ("courses.change_courses")
+    model = Topic
+    template_name = "courses/topic_edit.html"
+    success_url="../../../courses/list/"
+    fields =["course", "name", "intro"]
 
+class TopicDeleteDetailView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView, DetailView):
+    permission_required = ("courses.delete_courses")
+    model = Topic
+    template_name = "courses/topic_delete.html"
+    success_url=reverse_lazy("courses")
 
+class ContentDetailView(DetailView):
+    model = Content
+    template_name = "courses/content_detail.html"
 
-# class TopicEditView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
-#     permission_required = ("courses.add_topic")
-#     model = Topic
-#     template_name = "courses/topic_add.html"
-#     success_url="courses/"
-#     fields =["course", "name", "intro"]
+class ContentNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    permission_required = ("courses.add_topics")
+    model = Content
+    template_name = "courses/content_add.html"
+    success_url="../../../courses/list/"
+    fields =["topic", "name", "explanation", "example", "minutesToComplete"]
