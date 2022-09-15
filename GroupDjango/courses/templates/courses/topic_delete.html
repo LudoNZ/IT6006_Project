@@ -2,11 +2,11 @@
 
 <section class="container">
     <div class="course_container">
-        <h1>New Course</h1>
-        <form action="" method="POST" enctype="multipart/form-data">
+        <h1>Delete Topic</h1>
+        <form action="" method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Save">
+            <p>Are you sure you want to delete "{{ topic.name }}"?</p>
+            <input type="submit" value="Confirm">
         </form>
     </div>
 </section>
