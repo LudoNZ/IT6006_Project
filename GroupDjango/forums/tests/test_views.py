@@ -6,11 +6,10 @@ from forums.models import Forum, Comment, Category
 # Account Views Test.
 
 
-class TestViews(TestCase):
+class TestListViews(TestCase):
 
     def setUp(self):
         client = Client()
-        self.list_url = reverse('ListForums')
 
     def test_project_list_GET(self):
         response = self.client.get(reverse('list_url'))
