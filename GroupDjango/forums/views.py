@@ -43,7 +43,7 @@ class SingleForum(generic.DetailView):
         return context
 
     def get_comment_count(self):
-        comment_counter = Commnet.object.annotate(count('forum'))
+        comment_counter = Comment.object.annotate(count('forum'))
         comment_count = comment_counter[self]
         return comment_count
 
