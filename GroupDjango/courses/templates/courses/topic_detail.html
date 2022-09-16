@@ -24,25 +24,9 @@
 
         <div class="course_detail_flex">
         {% for content in topic.content_set.all %}
-            <div class="card">
-                <div>
-                    <div style="float:right;">
-                        <a style="color:#9c62d1" href="{% url 'topic_delete' topic.pk %}">
-                            Delete
-                        </a>
-                    </div>
-                    <div style="float:right;margin-right:10px;">
-                        <a style="color:#9c62d1" href="{% url 'topic_edit' topic.pk %}">
-                            Edit
-                        </a>
-                    </div>
-                </div>
-                <a href="{% url 'content_detail' pk=content.id %}"
-                    <h3 class="topic_name">{{content.name}}</h3>
-                </a>
-                <p>{{ content.minutesToComplete}} min</p>
-                
-            </div>
+        
+            {% include 'components/content_card.html' %}
+
         {% endfor topic %}
         <div> 
         

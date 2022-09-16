@@ -15,3 +15,6 @@ class Result(models.Model):
     user = models.ForeignKey('accounts.CustomUser', on_delete= models.CASCADE)
     question = models.ForeignKey('courses.Question', on_delete= models.CASCADE)
     result = models.BooleanField(null=True)
+
+    def __str__(self):
+        return f'{self.question} - {self.user}'
