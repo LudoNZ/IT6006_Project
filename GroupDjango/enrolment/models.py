@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # Create your models here.
 class Enrolment(models.Model):
     user = models.ForeignKey('accounts.CustomUser', on_delete= models.CASCADE)
@@ -13,6 +12,6 @@ class Enrolment(models.Model):
         return str
 
 class Result(models.Model):
-    enrolment = models.ForeignKey(Enrolment, on_delete= models.CASCADE)
+    user = models.ForeignKey('accounts.CustomUser', on_delete= models.CASCADE)
     question = models.ForeignKey('courses.Question', on_delete= models.CASCADE)
     result = models.BooleanField(null=True)
