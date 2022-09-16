@@ -32,31 +32,23 @@
             <br>
             <h2 class="course_detail_title"> {{ course.howHeading }}:</h2>
             <p class="course_detail_p"> {{ course.howDescription }} </p>
+        
+            <br>
+
+            <h2 class="course_detail_title">{{ course.name }} Topics:</h2>
+            
+            <div class="course_detail_flex">           
+                {% for topic in course.topic_set.all %}
+                    
+                    {% include 'components/topic_card.html' %} 
+                
+                {% endfor topic %}
+            <div> 
+
+            <button class="btn_topic_list">
+                <a href="{% url 'topic_list' course.id %}">More about Topics</a>
+            </button>
         </div>
-
-        <h2 class="course_detail_title"> {{ course.whatHeading }} </h2>
-        <p class="course_detail_p"> {{ course.whatDescription }} </p>
-        <br>
-        <h2 class="course_detail_title"> {{ course.howHeading }}:</h2>
-        <p class="course_detail_p"> {{ course.howDescription }} </p>
-        <br>
-
-        <h2 class="course_detail_title">{{ course.name }} Topics:</h2>
-        <div class="course_detail_flex">
-        {% for topic in course.topic_set.all %}
-            <div class="card">
-                <div><div style="float:right;"><a style="color:#9c62d1" href="{% url 'topic_delete' topic.pk %}">Delete</a></div><div style="float:right;margin-right:10px;"><a style="color:#9c62d1" href="{% url 'topic_edit' topic.pk %}">Edit</a></div></div>
-                <a href="{% url 'topic_detail' pk=topic.id %}"> <h3 class="topic_name">{{topic.name}}</h3></a>
-                {% for content in topic.content_set.all %}
-                    <p class="cont_name"><i class="fas fa-caret-right"></i> {{content.name}}</p>
-                {% endfor content %}
-            </div>
-        {% endfor topic %}
-        <div> 
-        <button class="btn_topic_list">
-            <a href="{% url 'topic_list' course.id %}">More about Topics</a>
-        </button>
-          
     </div>
 </section>
 {% endblock content %}
