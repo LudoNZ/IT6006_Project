@@ -8,6 +8,7 @@ from django.urls import re_path
 from courses.forms import TopicNoteForm
 
 from .models import Course, Topic, Content
+from enrolment.models import Result
 
 # Create your views here.
 
@@ -73,6 +74,13 @@ class TopicDeleteDetailView(LoginRequiredMixin, PermissionRequiredMixin, DeleteV
 class ContentDetailView(DetailView):
     model = Content
     template_name = "courses/content_detail.html"
+    
+    def get(self, request, pk):
+        content = Content.objects.get(pk=pk)
+        user_results = Result.objects.filter(user=request.user).all()
+        return render(request, 'courses/content_detail.html', {'user_results': user_results, 
+                                                                'content': content})
+
 
 class ContentNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ("courses.add_topics")

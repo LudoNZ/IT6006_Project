@@ -16,5 +16,14 @@
             {{question.answer}}
         </h3>
     </a>
+    {% for result in user_results %}
+        {% if result.question == question %}
+            {% if result.result %}
+                <p>user result: Passed</p>
+            {% else %}
+                <p>user result: Failed</p>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
     
 </div>
