@@ -45,4 +45,17 @@
              error: function (rs, e) { }
          });
     })
+
+    $("#false_{{question.id}}").click(function () {
+        $.ajax({
+            type: "POST",
+            url: "{% url 'answer_false' id=question.id pk=content.id %}",
+            data: { 'csrfmiddlewaretoken': '{{csrf_token}}' },
+            dataType: "json",
+            success: function (r) {
+                alert(r)
+            },
+            error: function (rs, e) { }
+        });
+   })
  </script>

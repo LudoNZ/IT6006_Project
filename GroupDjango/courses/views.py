@@ -94,9 +94,33 @@ def answer_true(request, id, pk):
     question = get_object_or_404(Question, id=id)
         
     if question.answer:
-        result = Result.objects.get_or_create(user=request.user, question=question, result=True)
+        result = Result.objects.update_or_create(
+                        user=request.user, 
+                        question=question,
+                        defaults={'result': True})
     else:
-        result = Result.objects.get_or_create(user=request.user, question=question, result=False)
+        result = Result.objects.update_or_create(
+                        user=request.user, 
+                        question=question,
+                        defaults={'result': False})
+    result.save()
+
+    return JsonResponse({'is_correct': result.result})
+
+def answer_false(request, id, pk):
+    question = get_object_or_404(Question, id=id)
+    
+
+    if not question.answer:
+        result = Result.objects.update_or_create(
+                        user=request.user, 
+                        question=question,
+                        defaults={'result': True})
+    else:
+        result = Result.objects.update_or_create(
+                        user=request.user, 
+                        question=question,
+                        defaults={'result': False})
 
     result.save()
 

@@ -17,6 +17,6 @@ urlpatterns = [
     path("courses/topic/content/new", ContentNewDetailView.as_view(), name="content_add"),
     path("courses/topic/content/<int:pk>", ContentDetailView.as_view(), name="content_detail"),
     path("courses/topic/content/<int:pk>/true/<int:id>", answer_true, name="answer_true"),
-
+    path("courses/topic/content/<int:pk>/false/<int:id>", answer_false, name="answer_false"),
 ]
 
