@@ -1,3 +1,4 @@
+from unittest import result
 from django.db import models
 
 # Create your models here.
@@ -17,4 +18,4 @@ class Result(models.Model):
     result = models.BooleanField(null=True)
 
     def __str__(self):
-        return f'{self.question} - {self.user}'
+        return f'{self.question} - {self.user} - {self.result}'

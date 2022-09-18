@@ -12,9 +12,12 @@
         <h3 class="topic_name">
             {{question.question}}
         </h3>
-        <h3 class="topic_name">
-            {{question.answer}}
-        </h3>
+        <button id="true_{{question.id}}" type="button" value="True" class="topic_name">
+            True
+        </button>
+        <button id="false_{{question.id}}" type="button" value="True" class="topic_name">
+            False
+        </button>
     </a>
     {% for result in user_results %}
         {% if result.question == question %}
@@ -26,4 +29,20 @@
         {% endif %}
     {% endfor %}
     
+    
 </div>
+
+<script>
+    $("#true_{{question.id}}").click(function () {
+         $.ajax({
+             type: "POST",
+             url: "{% url 'answer_true' id=question.id pk=content.id %}",
+             data: { 'csrfmiddlewaretoken': '{{csrf_token}}' },
+             dataType: "json",
+             success: function (r) {
+                 alert(r)
+             },
+             error: function (rs, e) { }
+         });
+    })
+ </script>
