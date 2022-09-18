@@ -84,6 +84,10 @@ form.forum_search::after {
     border-radius: 5px;
 }
 
+.forum_btn:hover {
+    background-color: #b48adb;
+}
+
 .card_forum {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
@@ -198,6 +202,10 @@ form.forum_search::after {
     padding: 1rem;
     border-radius: 3px;
     color: #666666;
+}
+
+.forum_user_box:hover {
+    background-color: #e5d8f0;
 }
 
 
