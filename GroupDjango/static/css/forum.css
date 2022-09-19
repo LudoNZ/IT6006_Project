@@ -17,8 +17,15 @@
 }
 
 .forum_header_container {
-    padding: 2rem 1rem 3.5rem 1rem;
+    padding: 1.5rem 2rem 3rem 2rem;
     height: auto;
+}
+
+@media screen and (max-width: 1050px) {
+    .forum_header_container {
+        padding: 1rem;
+        height: auto;
+    }
 }
 
 /* FORUM HEADER STYLING */
@@ -41,20 +48,24 @@
 
 }
 
+.forum_search_container {
+    width: 35%;
+}
+
 form.forum_search input[type=text] {
-    padding: 10px;
+    padding: 10px 0;
     font-size: 17px;
     border: 3px solid #ffffff;
     border-radius: 5px 0px 0px 5px;
     float: left;
-    width: 20%;
+    width: 85%;
     background: #ffffff;
 }
 
 form.forum_search button {
     float: left;
-    width: 5%;
-    padding: 10px;
+    width: 15%;
+    padding: 10px 0px;
     background: #ffffff;
     color: #444444;
     font-size: 1.2rem;
@@ -73,19 +84,21 @@ form.forum_search::after {
     display: table;
 }
 
-.forum_btn {
+.forum_btn_post {
     display: block;
-    width: 25%;
+    width: 35%;
     padding: .7rem;
     color: #FFFFFF;
     background-color: #9C62D1;
-    margin: 2rem 0 3rem 0;
+    border: 2px solid #9C62D1;
+    margin: 2rem 0 1rem 0;
     text-align: center;
     border-radius: 5px;
 }
 
-.forum_btn:hover {
+.forum_btn_post:hover {
     background-color: #b48adb;
+    border: 2px solid #b48adb;
 }
 
 .card_forum {
@@ -94,6 +107,27 @@ form.forum_search::after {
     margin: 1rem 1rem 2rem 1rem;
     padding: 1.7rem;
 }
+
+@media screen and (max-width: 950px) {
+    .forum_search_container {
+        width: 60%;
+    }
+
+    .forum_btn_post {
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .forum_search_container {
+        width: 100%;
+    }
+
+    .forum_btn_post {
+        width: 100%;
+    }
+}
+
 
 /* FORUM NAVBAR STYLING */
 .forum_navbar ul {
@@ -128,7 +162,7 @@ form.forum_search::after {
 }
 
 
-
+/* FORUM base.html */
 /* FORUM MAIN CONTENT STYLING */
 .forum_main_flex {
     display: flex;
@@ -143,6 +177,19 @@ form.forum_search::after {
 .forum_main_flex_category {
     width: 25%;
 }
+
+@media screen and (max-width: 1000px) {
+    .forum_main_flex_contents {
+        width: 100%;
+        padding-bottom: 2rem;
+    }
+
+    .forum_main_flex_category {
+        width: 100%;
+    }
+}
+
+
 
 .forum_list_title {
     font-family: Roboto, Arial, Helvetica, sans-serif;
@@ -185,6 +232,16 @@ form.forum_search::after {
     color: #ffffff;
     border-radius: 1.5px;
 }
+
+@media screen and (max-width: 1000px) {
+    .forum_main_flex {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}
+
+
+
 
 /* FORUM USER / CATEGORY LIST STYLING */
 

@@ -8,20 +8,20 @@
                     <h1 class="forum_heading">We are here to help!</h1>
 
                     <p class="forum_header_p">This Q&amp;A forum is a great place to share your problem and <br>
-                        tacles togather for finding the solution.<br>
+                        tackle it togather to find the solution.<br>
                         Search a solution or post your problem here.
                     </p>
                 </div>
-                <div>
+                <div class="forum_search_container">
                     <form class="forum_search" action="/action_page.php">
                         <input type="text" name="search">
-                        <button type="submit"><i class="fa fa-search"></i></button>
+                        <button type="submit"> <i class="fa fa-search"></i> </button>
                     </form>
                 </div>
                 
                     {% if user.is_authenticated %}
                     <div>
-                        <a class="forum_btn" href="{% url 'forums:create' %}" class='btn btn-md btn-fill btn-warning'>
+                        <a class="forum_btn_post" href="{% url 'forums:create' %}">
                             Post New Question</a>
                     </div>
                     {% endif %}         
@@ -36,7 +36,7 @@
         <ul>
             <li><a id="active" href="{% url 'forums:all' %}">Recent Questions</a></li>
             <li><a href="#">Most Responses</a></li>
-            <li><a href="{% url 'forums:selected_unsolved' %}">Un Solved</a></li>
+            <li><a href="{% url 'forums:selected_unsolved' %}">Unsolved</a></li>
             {% if user.is_authenticated %}
                 <li><a href="{% url 'forums:selected_user' user.username %}">Your List</a></li>
             {% endif %}
