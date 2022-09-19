@@ -1,6 +1,7 @@
 from time import time
 from django.db import models
 from django.forms import CharField
+from django.db.models import Sum
 
 # Create your models here.
 
@@ -34,6 +35,11 @@ class Content(models.Model):
     def __str__(self):
         str = self.topic.course.name + ", " + self.topic.name + ", " + self.name
         return str
+
+    @property
+    def count_questions(self):
+        return Question.objects.filter(content = self).count()
+
 
 class Question(models.Model):
     content = models.ForeignKey(Content, on_delete= models.CASCADE)
