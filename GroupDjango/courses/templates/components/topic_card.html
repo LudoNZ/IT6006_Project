@@ -1,0 +1,14 @@
+<div class="card">
+    <div>
+        <div style="float:right;"><a style="color:#9c62d1" href="{% url 'topic_delete' topic.pk %}">Delete</a>
+        </div>
+        <div style="float:right;margin-right:10px;"><a style="color:#9c62d1" href="{% url 'topic_edit' topic.pk %}">Edit</a>
+        </div>
+    </div>
+    <a href="{% url 'topic_detail' pk=topic.id %}"> <h3 class="topic_name">{{topic.name}}</h3></a>
+    {% for content in topic.content_set.all %}
+        <p class="cont_name"><i class="fas fa-caret-right"></i> {{content.name}}</p>
+        <p>time: #SUMofCONTENTS</p>
+        <p>questions: #RESULTS / #COUNT</p>
+    {% endfor content %}
+</div>

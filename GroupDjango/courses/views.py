@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
 import requests
 from django.views.generic import ListView, DetailView, TemplateView
 from django.urls import reverse_lazy
@@ -7,7 +8,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, 
 from django.urls import re_path
 from courses.forms import TopicNoteForm
 
-from .models import Course, Topic, Content
+from .models import Course, Question, Topic, Content
+from enrolment.models import Result
 
 # Create your views here.
 
@@ -73,6 +75,13 @@ class TopicDeleteDetailView(LoginRequiredMixin, PermissionRequiredMixin, DeleteV
 class ContentDetailView(DetailView):
     model = Content
     template_name = "courses/content_detail.html"
+    
+    def get(self, request, pk):
+        content = Content.objects.get(pk=pk)
+        user_results = Result.objects.filter(user=request.user).all()
+        return render(request, 'courses/content_detail.html', {'user_results': user_results, 
+                                                                'content': content})
+
 
 class ContentNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ("courses.add_topics")
@@ -80,3 +89,39 @@ class ContentNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateVi
     template_name = "courses/content_add.html"
     success_url="../../../courses/list/"
     fields =["topic", "name", "explanation", "example", "minutesToComplete"]
+
+def answer_true(request, id, pk):
+    question = get_object_or_404(Question, id=id)
+        
+    if question.answer:
+        result = Result.objects.update_or_create(
+                        user=request.user, 
+                        question=question,
+                        defaults={'result': True})
+    else:
+        result = Result.objects.update_or_create(
+                        user=request.user, 
+                        question=question,
+                        defaults={'result': False})
+    result.save()
+
+    return JsonResponse({'is_correct': result.result})
+
+def answer_false(request, id, pk):
+    question = get_object_or_404(Question, id=id)
+    
+
+    if not question.answer:
+        result = Result.objects.update_or_create(
+                        user=request.user, 
+                        question=question,
+                        defaults={'result': True})
+    else:
+        result = Result.objects.update_or_create(
+                        user=request.user, 
+                        question=question,
+                        defaults={'result': False})
+
+    result.save()
+
+    return JsonResponse({'is_correct': result.result})
