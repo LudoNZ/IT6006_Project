@@ -44,7 +44,7 @@ class Content(models.Model):
 
 class Question(models.Model):
     content = models.ForeignKey(Content, on_delete= models.CASCADE)
-    question = models.CharField(max_length=50)
+    question = models.CharField(max_length=100)
     answer = models.BooleanField()
 
     def __str__(self):
