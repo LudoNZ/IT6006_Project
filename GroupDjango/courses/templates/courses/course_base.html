@@ -1,12 +1,15 @@
-{% extends "base.html" %}
-
-
+{% extends 'base.html' %}
 {% block title %} 
     Course Detail
 {% endblock title %} 
 
-
 {% block content %}
 
+<!-- Course Header -->
+    {% block course_header %}{% endblock %}
 
-{% endblock content %}
+<!-- Course contents -->
+<div class="container">
+    {% block course_content %}{% endblock %}
+</div>
+{% endblock %}

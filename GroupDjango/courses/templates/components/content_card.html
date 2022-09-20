@@ -1,20 +1,25 @@
-<div class="card">
-    <div>
-        <div style="float:right;">
-            <a style="color:#9c62d1" href="{% url 'topic_delete' topic.pk %}">
-                Delete
-            </a>
-        </div>
-        <div style="float:right;margin-right:10px;">
-            <a style="color:#9c62d1" href="{% url 'topic_edit' topic.pk %}">
-                Edit
-            </a>
-        </div>
-    </div>
-    <a href="{% url 'content_detail' pk=content.id %}"
-        <h3 class="topic_name">{{content.name}}</h3>
-    </a>
-    <p>{{ content.minutesToComplete }} min</p>
-    <p>progress: RESULTS/{{ content.count_questions }} </p>
+<div class="card_course_topic">
     
+    <h3 class="topic_name"><a href="{% url 'content_detail' pk=content.id %}">{{content.name}}</a></h3>
+    
+    <div class="topic_container">
+        <span class="course_progressbar_title"><i class="far fa-clock" id="purple"></i> {{ content.minutesToComplete }} min</span>
+        <span class="course_progressbar_title" style="padding-left:10px"><i class="fas fa-star" id="purple"></i> Progress: RESULTS/{{ content.count_questions }}</span>
+        <br>
+        {% if user.is_authenticated %}
+                {% for group in user.groups.all %}
+                    {% if group.name == "Developer" %}
+                        <h3 class="course_add_link">
+                            <a href="{% url 'topic_delete' topic.pk %}" style="padding-left:20px"><i class="fas fa-trash-alt" id="orange"></i> Delete Topic</a>
+                        </h3>
+                        <h3 class="course_add_link" style="padding-left:20px">
+                            <a href="{% url 'topic_edit' topic.pk %}"><i class="fas fa-edit" id="purple"></i> Edit Topic</a>
+                        </h3>      
+                    {% endif %}
+                {%endfor%}
+            {% endif %}
+    </div>
+ 
 </div>
+
+    

@@ -417,8 +417,12 @@ form.forum_search_right button:hover {
 }
 
 @media screen and (max-width: 750px) {
+    .forum_form_center {
+        display: block;
+    }
+
     .forum_form_card {
-        min-width: none;
+        min-width: 100%;
     }
 }
 
