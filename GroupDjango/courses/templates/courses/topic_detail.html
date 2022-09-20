@@ -23,11 +23,13 @@
             <p class="border">{{ topic.intro }}<p>
 
         <div class="course_detail_flex">
-        {% for content in topic.content_set.all %}
+        
+        {% for c in content %}
         
             {% include 'components/content_card.html' %}
-
-        {% endfor topic %}
+        
+        {% endfor %}
+        
         <div> 
         
           

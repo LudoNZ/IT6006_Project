@@ -31,6 +31,7 @@ class Content(models.Model):
     explanation = models.TextField(max_length=500, default="explanation here...")
     example = models.TextField(max_length=500, default="example here...")
     minutesToComplete = models.SmallIntegerField(default=8)
+    template_user_result = models.SmallIntegerField(default=0)
 
     def __str__(self):
         str = self.topic.course.name + ", " + self.topic.name + ", " + self.name

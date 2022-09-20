@@ -58,7 +58,20 @@ class TopicNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView
 class TopicDetailView(DetailView):
     model = Topic
     template_name = "courses/topic_detail.html"
+    
+    def get(self, request, pk):
+        content = Content.objects.filter(topic__pk=pk).all()
+        user_results = Result.objects.filter(user=request.user, result=True).all()
+        
+        for c in content:
+            c.template_user_result = 0
+            for a in user_results:
+                if a.question.content == c:
+                    c.template_user_result += 1
 
+        return render(request, 'courses/topic_detail.html', {'content': content})
+
+    
 class TopicEditDetailView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ("courses.change_courses")
     model = Topic
