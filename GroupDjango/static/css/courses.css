@@ -17,7 +17,7 @@
     background-image: url("/static/images/course_background.png");
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #F5C03B;
+    background-color: #CA92DF;
 
 }
 
@@ -37,6 +37,14 @@
     }
 }
 
+.course_heading_white {
+    color: #FFFFFF;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
 .course_heading {
     color: #666666;
     font-family: Roboto, Arial, Helvetica, sans-serif;
@@ -46,7 +54,7 @@
 }
 
 .course_header_p {
-    color: #666666;
+    color: #FFFFFF;
     font-family: Roboto, Arial, Helvetica, sans-serif;
     font-weight: 400;
     font-size: 1rem;
