@@ -54,14 +54,15 @@
                 {% for group in user.groups.all %}
                     {% if group.name == "Developer" %}
                         <h3 class="course_add_link">
+                            <a href="{% url 'topic_add' %}" style="padding-left:20px"><i class="fas fa-plus-circle" id="orange"></i> Add Topic</a>
+                        </h3>  
+                        <h3 class="course_add_link">
                             <a href="{% url 'course_delete' course.pk %}" style="padding-left:20px"><i class="fas fa-trash-alt" id="orange"></i> Delete Course</a>
                         </h3>
-                        <h3 class="course_add_link" style="padding-left:20px">
+                        <h3 class="course_add_link">
                             <a href="{% url 'course_edit' course.pk %}"><i class="fas fa-edit" id="purple"></i> Edit Course</a>
                         </h3>
-                        <h3 class="course_add_link">
-                            <a href="{% url 'topic_add' %}"><i class="fas fa-plus-circle" id="orange"></i> Add Topic</a>
-                        </h3>          
+                                
                     {% endif %}
                 {%endfor%}
             {% endif %}
