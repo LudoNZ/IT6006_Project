@@ -11,18 +11,20 @@
     {% include "forums/_forum_simple_header.html" %}
 {% endblock %}
 
-{% block forum_content%}
+{% block form_content %}
     <div class="container">
         <div class="forum_form_center">
             <div class="forum_form_card">
-                <h1 class="forum_form_title">New Comment<h1>
+                <h1 class="forum_form_title">New Comment</h1>
+
                 <form method="post" novalidate>
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <button type="submit" class='reg_button'>Submit</button>
+                    <button class="reg_button" type="submit">Submit</button>
                 </form>
             </div>
         </div>
     </div>
+
     <script>var editor = new MediumEditor('.editable');</script>
 {% endblock %}

@@ -23,10 +23,9 @@ class TestAccountModel(TestCase):
         self.assertEqual(response.status_code, 200)
         # not 302 because using a redirect to send back the homepage view?
 
-    # Test autentication
+    # # Test autentication
     # def test_user_authenticated(self):
-    #     user = get_user_model().objects.create_user(
-    #         username='test', password='12test12')
+    #     user = self.signup_url
     #     login = auth_login(request, user)
     #     self.assertTrue((self.user is not None) and self.user.is_authenticated)
     #     self.assertEqual(self.user, 'test')

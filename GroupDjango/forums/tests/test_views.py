@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 client = Client()
 
 
-class TestForumListViews(TestCase):
+class TestListForumsViews(TestCase):
 
     def test_forum_list_view(self):
         response = client.get(reverse('forums:all'))
@@ -15,7 +15,7 @@ class TestForumListViews(TestCase):
         self.assertTemplateUsed(response, 'forums/forum_list.html')
 
 
-class TestForumUnsolvedListView(TestCase):
+class TestUnsolvedForumListView(TestCase):
 
     def test_forum_unsolved_list_view(self):
         response = client.get(reverse('forums:selected_unsolved'))
@@ -24,7 +24,7 @@ class TestForumUnsolvedListView(TestCase):
             response, 'forums/forum_list_selected_unsolve.html')
 
 
-class TestForumDetailView(TestCase):
+class TestDetailForumView(TestCase):
 
     @classmethod
     def setUp(cls):
@@ -40,6 +40,30 @@ class TestForumDetailView(TestCase):
 
         response = client.get(
             reverse('forums:single', args=[self.test_forum.pk]))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(
             response, 'forums/forum_detail.html')
+
+
+class TestCreateForumView(TestCase):
+
+    @classmethod
+    def setUp(cls):
+        cls.test_user = get_user_model().objects.create_user(
+            username='test', password='12test12')
+        cls.test_category = Category.objects.create(name="PHP", position=0)
+
+    # def test_forum_create_view(self):
+    #     response = self.client.post(
+    #         reverse('forums:create'), {
+    #             "title": "PHP tutorial question",
+    #             "slug": "php_tutorial_question",
+    #             "category": self.test_category.id,
+    #             "description": "blablabla",
+    #             "is_closed": False,
+    #             "user": self.test_user.id,
+    #         },
+    #     )
+    #     self.assertEqual(response.status_code, 302)
+    #     self.assertEqual(Forum.objects.last().title, "PHP tutorial question")
+    #     self.assertEqual(Forum.objects.last().description, "blablabla")
