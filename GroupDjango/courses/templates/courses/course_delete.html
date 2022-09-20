@@ -1,15 +1,19 @@
-{% extends "base.html" %} {%block content %}
+{% extends 'courses/course_base.html' %}
 
-<section class="container">
+{% block title %} 
+    Create Course
+{% endblock title %} 
+
+{% block course_content %}
     <div class="course_container">
-        <h1>Edit Course</h1>
+        <h1 class="forum_form_title">Delete the Course</h1>
         <form action="" method="POST">
             {% csrf_token %}
-            <p>Are you sure you want to delete "{{ course.name }}"?</p>
-            <input type="submit" value="Confirm">
+            <p class="delete_text">Are you sure you want to delete "{{ course.name }}"?</p>
+            <button type="submit" class="form_delete_button">Confirm</button>
         </form>
     </div>
 </section>
 
-{% endblock content %}
+{% endblock course_content %}
 

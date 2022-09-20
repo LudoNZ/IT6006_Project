@@ -10,7 +10,7 @@
         <div class="container">
             <div class="course_header_container">
                 <div>
-                    <h1 class="course_heading_white">Python Beginners</h1>
+                    <h1 class="course_heading_white">#Python Beginners</h1>
                 </div>
             </div>
         </div>
@@ -36,10 +36,8 @@
             <h2 class="course_detail_title" style="margin-bottom:10px">{{ course.name }} Topics:</h2>
             
             <div class="course_detail_flex">
-                {% for content in topic.content_set.all %}
-                
-                    {% include 'components/content_card.html' %}
-        
+                {% for content in topic.content_set.all %}            
+                    {% include 'components/content_card.html' %}      
                 {% endfor topic %}
                 <div> 
 

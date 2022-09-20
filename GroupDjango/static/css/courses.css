@@ -306,22 +306,70 @@
 }
 
 
-/* Topic -Topic Dteail */
+/* Topic Dteail */
 .course_topick_detail_container {
     padding: 3rem 3rem;
     margin-bottom: 1.5rem;
 }
 
 
-/* Topic -Content Dteail */
+/* Content Dteail */
 .content_detail_topic_title {
+    font-family: Roboto, Arial, Helvetica, sans-serif;
     font-size: 1rem;
+    font-weight: 400;
     color: #888888;
     margin-bottom: .5rem;
 }
 
+.content_page {
+    color: #555555;
+    font-size: 1.2rem;
+}
 
+.content_page:hover {
+    opacity: 0.5;
+}
 
+/* Question card */
+.content_question {
+    font-family: Quicksand, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    text-align: center;
+    font-size: 2.2rem;
+    padding-top: 2rem;
+    padding-bottom: 1.3rem;
+    color: #555555;
+}
+
+.btn_question_position_center {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 1rem 0;
+}
+
+.btn_question {
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    background-color: #9C62D1;
+    padding: .7rem;
+    width: 11rem;
+    cursor: pointer;
+}
+
+.btn_question:hover {
+    opacity: 0.7;
+}
+
+.result_container {
+    padding-bottom: 1.5rem;
+}
+
+.result {
+    font-size: 1.3rem;
+    float: right;
+}
 
 
 /* Course Form */
@@ -365,4 +413,23 @@
     border: none;
     font-size: 1.3rem;
     border-radius: 5px;
+}
+
+.delete_text {
+    font-size: 1.3rem;
+    color: #555555;
+}
+
+.form_delete_button {
+    margin-top: 1rem;
+    padding: .7rem 2rem;
+    color: #ffffff;
+    background-color: #F5C03B;
+    border: none;
+    font-size: 1.3rem;
+    border-radius: 5px;
+}
+
+.form_delete_button:hover {
+    opacity: .6;
 }
