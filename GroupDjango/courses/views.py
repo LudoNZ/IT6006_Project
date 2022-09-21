@@ -58,19 +58,20 @@ class CourseDetailView(DetailView):
         topics = Topic.objects.filter(course=course).all()
 
         contents = Content.objects.filter(topic__course__pk=pk).all()
-        user_results = Result.objects.filter(user=request.user, result=True).all()
-        
-        for c in contents:
-            c.template_user_result = 0
-            for a in user_results:
-                if a.question.content == c:
-                    c.template_user_result += 1
-        
-        return render(request, 'courses/course_detail.html', {'course': course, 
-                                                                'topics': topics,
-                                                                'contents': contents,
-                                                                'user_results': user_results,
-                                                                })
+        print('request.user = ', request.user)
+        if request.user.is_authenticated:
+            user_results = Result.objects.filter(user=request.user, result=True).all()
+            
+            for c in contents:
+                c.template_user_result = 0
+                for a in user_results:
+                    if a.question.content == c:
+                        c.template_user_result += 1
+            context = {'course': course, 'topics': topics, 'contents': contents, 'user_results': user_results}
+        else:
+            context = {'course': course, 'topics': topics, 'contents': contents}
+
+        return render(request, 'courses/course_detail.html', context)
 
 
 class CourseNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
@@ -118,13 +119,16 @@ class TopicDetailView(DetailView):
     def get(self, request, pk):
         topic = Topic.objects.get(id=pk)
         content = Content.objects.filter(topic__pk=pk).all()
-        user_results = Result.objects.filter(user=request.user, result=True).all()
         
-        for c in content:
-            c.template_user_result = 0
-            for a in user_results:
-                if a.question.content == c:
-                    c.template_user_result += 1
+        
+        if request.user.is_authenticated:
+            user_results = Result.objects.filter(user=request.user, result=True).all()
+
+            for c in content:
+                c.template_user_result = 0
+                for a in user_results:
+                    if a.question.content == c:
+                        c.template_user_result += 1
 
         return render(request, 'courses/topic_detail.html', {'content': content,
                                                                 'topic': topic})
@@ -151,15 +155,17 @@ class ContentDetailView(DetailView):
 
     def get(self, request, pk):
         content = Content.objects.get(pk=pk)
-        user_results = Result.objects.filter(user=request.user).all()
-        
         prev_id= content.id - 1
         next_id= content.id + 1
 
-        return render(request, 'courses/content_detail.html', {'user_results': user_results, 
-                                                                'content': content,
-                                                                'prev_id': prev_id,
-                                                                'next_id': next_id})
+        if request.user.is_authenticated:
+            user_results = Result.objects.filter(user=request.user).all()
+            
+            context = {'content': content, 'prev_id': prev_id, 'next_id': next_id, 'user_results': user_results,}
+        else:
+            context = {'content': content, 'prev_id': prev_id, 'next_id': next_id}
+
+        return render(request, 'courses/content_detail.html', context)
 
 
 class ContentNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
