@@ -35,8 +35,9 @@
                 {% for question in content.question_set.all %}                    
                     {% include 'components/question_card.html' %}
                 {% endfor question %}
-                <a href="#">< Back</a>
-                <a href="#" style="float:right">Next ></a>
+                
+                <a href="{% url 'content_detail' pk=prev_id %}">< Prev</a>
+                <a href="{% url 'content_detail' pk=next_id %}" style="float:right">Next ></a>
         </div>
     </section>
 {% endblock %}

@@ -114,8 +114,14 @@ class ContentDetailView(DetailView):
     def get(self, request, pk):
         content = Content.objects.get(pk=pk)
         user_results = Result.objects.filter(user=request.user).all()
+        
+        prev_id= content.id - 1
+        next_id= content.id + 1
+
         return render(request, 'courses/content_detail.html', {'user_results': user_results, 
-                                                                'content': content})
+                                                                'content': content,
+                                                                'prev_id': prev_id,
+                                                                'next_id': next_id})
 
 
 class ContentNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
