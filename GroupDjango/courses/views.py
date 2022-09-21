@@ -6,10 +6,11 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.urls import re_path
+
 from courses.forms import TopicNoteForm
 
 from .models import Course, Question, Topic, Content
-from enrolment.models import Result
+from enrolment.models import Result, Enrolment
 
 # Create your views here.
 
@@ -18,7 +19,35 @@ class DeveloperPageView(TemplateView):
 
 class CourseListView(ListView):
     model = Course
-    template_name = "courses/course_list.html"
+
+    def get(self, request):
+        courses = Course.objects.all()
+        user_results = Result.objects.filter(user=request.user).all()
+        enrolments = Enrolment.objects.filter(user=request.user).all()
+
+
+        for c in courses:
+            question_count = c.count_questions
+            c.template_user_result = 0
+            for e in enrolments:
+                if e.course == c:
+                    for a in user_results:
+                        if a.question.content.topic.course == c:
+                            if a.result==True:
+                                c.template_user_result += 1
+                    
+                    if question_count > 0:
+                        e.grade = int(c.template_user_result / question_count *100 )
+                    else:
+                        e.grade = 0
+                    print('question_count = ', question_count)
+                    print('c.template_user_result =', c.template_user_result)
+
+
+        return render(request, 'courses/course_list.html', {'courses': courses,
+                                                            'enrolments': enrolments,
+                                                            })
+
 
 class CourseDetailView(DetailView):
     model = Course

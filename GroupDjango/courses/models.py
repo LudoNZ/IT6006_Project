@@ -12,9 +12,16 @@ class Course(models.Model):
     howHeading = models.CharField(max_length=150, default="hHeading here...")
     howDescription = models.TextField(max_length=500, default="hDescription here...")
     price = models.DecimalField(max_digits=10, decimal_places=2, default=10.00)
-
+    
+    template_user_result = models.SmallIntegerField(default=0)
+    
     def __str__(self):
         return self.name
+
+    @property
+    def count_questions(self):
+        return Question.objects.filter(content__topic__course = self).count()
+
 
 class Topic(models.Model):
     course = models.ForeignKey(Course, on_delete= models.CASCADE)

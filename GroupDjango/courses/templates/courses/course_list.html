@@ -53,7 +53,7 @@
             {% endif %}
 
             
-            {% for course in course_list %}
+            {% for course in courses %}
                 <div class="card_course">
                     <h2 class="course_title">
                         <a href="{% url 'course_detail' course.pk %}">
@@ -61,11 +61,11 @@
                         </a>       
                     </h2>
                 
-                    {% for enrolment in course.enrolment_set.all %}
-
+                    {% for enrolment in enrolments %}
+                    {% if enrolment.course == course %}
                         {% if enrolment.user == user %}
                             <div class="course_progressbar_container">
-                                <div class="course_progressbar_title"><p>Course Progress: </p></div>
+                                <div class="course_progressbar_title"><p>Course Progress: {{ enrolment.grade }}</p></div>
                                 <div class="course_progressbar_grey">
                                     <div class="course_progress" style="width:{{ enrolment.grade|add:0 }}%">{{ enrolment.grade }} %</div>
                                 </div>
@@ -77,13 +77,13 @@
                                 </div>
                             </div>
                             <div class="course_progressbar_container">
-                                <div class="course_progressbar_title"><p>Question Count: </p></div>
+                                <div class="course_progressbar_title"><p>Question Count: {{course.count_questions}} </p></div>
                                 <div class="course_progressbar_grey">
                                     <div class="course_progress" style="width:90%"> 7/8</div>
                                 </div>
                             </div>
                         {% endif %}          
-
+                    {% endif %}
                     {% endfor enrolment %}
                 </div>
             {% endfor %}
