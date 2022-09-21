@@ -40,19 +40,8 @@
 {% block course_content %}
     <section class="container">
         <div class="course_container">
-            {% if user.is_authenticated %}
-                {% for group in user.groups.all %}
-                    {% if group.name == "Developer" %}
-                            <h3 class="course_add_link">
-                                <a href="{% url 'course_new' %}"><i class="fas fa-plus-circle" id="orange"></i> Add New Course</a>
-                            </h3>
-                    {% endif %}
-                {%endfor%}
-                <h1 class="course_heading">{{ user.username }}'s Course Detail</h1>
 
-            {% endif %}
-
-            
+            <h1 class="course_heading">{{ user.username }}'s Course Detail</h1>
             {% for course in course_list %}
                 <div class="card_course">
                     <h2 class="course_title">
@@ -71,22 +60,25 @@
                                 </div>
                             </div>
                             <div class="course_progressbar_container">
-                                <div class="course_progressbar_title"><p>Course Results: </p></div>
-                                <div class="course_progressbar_grey">
-                                    <div class="course_progress" style="width:90%"> 90 %</div>
-                                </div>
-                            </div>
-                            <div class="course_progressbar_container">
-                                <div class="course_progressbar_title"><p>Question Count: </p></div>
-                                <div class="course_progressbar_grey">
-                                    <div class="course_progress" style="width:90%"> 7/8</div>
-                                </div>
+                                <div class="course_progressbar_title"><p>Course Results: Question Count </p></div>
                             </div>
                         {% endif %}          
 
                     {% endfor enrolment %}
                 </div>
             {% endfor %}
+
+            {% if user.is_authenticated %}
+                {% for group in user.groups.all %}
+                    {% if group.name == "Developer" %}
+                            <h3 class="course_add_link">
+                                <a href="{% url 'course_new' %}"><i class="fas fa-plus-circle" id="orange"></i> Add New Course</a>
+                            </h3>
+                    {% endif %}
+                {%endfor%}
+                
+
+            {% endif %}
         </div>
     </section>
 {% endblock course_content %}

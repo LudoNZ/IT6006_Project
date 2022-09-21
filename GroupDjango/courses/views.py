@@ -41,7 +41,7 @@ class CourseEditDetailView(LoginRequiredMixin, PermissionRequiredMixin, UpdateVi
     permission_required = ("courses.change_courses")
     model = Course
     #template_name = "courses/course_edit.html"
-    success_url = "../../../course/courses/list/"
+    success_url = "/course/courses/list/"
     fields = ["name", "whatHeading", "whatDescription",
               "howHeading", "howDescription", "price"]
 
@@ -50,7 +50,7 @@ class CourseDeleteDetailView(LoginRequiredMixin, PermissionRequiredMixin, Delete
     permission_required = ("courses.delete_courses")
     model = Course
     template_name = "courses/course_delete.html"
-    success_url = reverse_lazy("courses")
+    success_url = reverse_lazy("course_list")
 
 
 class TopicListView(DetailView):
@@ -61,8 +61,8 @@ class TopicListView(DetailView):
 class TopicNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ("courses.add_topics")
     model = Topic
-    template_name = "courses/topic_add.html"
-    success_url = "../../../courses/list/"
+    #template_name = "courses/topic_add.html"
+    success_url = "/course/courses/list/"
     fields = ["course", "name", "intro"]
 
 
@@ -74,8 +74,8 @@ class TopicDetailView(DetailView):
 class TopicEditDetailView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ("courses.change_courses")
     model = Topic
-    template_name = "courses/topic_edit.html"
-    success_url = "../../../courses/list/"
+    #template_name = "courses/topic_edit.html"
+    success_url = "/course/courses/list/"
     fields = ["course", "name", "intro"]
 
 
@@ -83,7 +83,7 @@ class TopicDeleteDetailView(LoginRequiredMixin, PermissionRequiredMixin, DeleteV
     permission_required = ("courses.delete_courses")
     model = Topic
     template_name = "courses/topic_delete.html"
-    success_url = reverse_lazy("courses")
+    success_url = reverse_lazy("course_list")
 
 
 class ContentDetailView(DetailView):
