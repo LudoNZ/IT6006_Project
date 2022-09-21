@@ -24,6 +24,10 @@ class Topic(models.Model):
     def __str__(self):
         str = self.course.name + ", " + self.name
         return str
+    
+    @property
+    def count_questions(self):
+        return Question.objects.filter(content__topic = self).count()
 
 class Content(models.Model):
     topic = models.ForeignKey(Topic, on_delete= models.CASCADE, default=4)

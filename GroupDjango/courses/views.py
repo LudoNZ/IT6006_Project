@@ -27,8 +27,21 @@ class CourseDetailView(DetailView):
     def get(self, request, pk):
         course = Course.objects.get(id=pk)
         topics = Topic.objects.filter(course=course).all()
+
+        contents = Content.objects.filter(topic__course__pk=pk).all()
+        user_results = Result.objects.filter(user=request.user, result=True).all()
         
-        return render(request, 'courses/course_detail.html', {'course': course, 'topics': topics})
+        for c in contents:
+            c.template_user_result = 0
+            for a in user_results:
+                if a.question.content == c:
+                    c.template_user_result += 1
+        
+        return render(request, 'courses/course_detail.html', {'course': course, 
+                                                                'topics': topics,
+                                                                'contents': contents,
+                                                                'user_results': user_results,
+                                                                })
 
 
 class CourseNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
