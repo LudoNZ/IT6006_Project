@@ -67,6 +67,7 @@ class TopicDetailView(DetailView):
     template_name = "courses/topic_detail.html"
     
     def get(self, request, pk):
+        topic = Topic.objects.get(id=pk)
         content = Content.objects.filter(topic__pk=pk).all()
         user_results = Result.objects.filter(user=request.user, result=True).all()
         
@@ -76,7 +77,8 @@ class TopicDetailView(DetailView):
                 if a.question.content == c:
                     c.template_user_result += 1
 
-        return render(request, 'courses/topic_detail.html', {'content': content})
+        return render(request, 'courses/topic_detail.html', {'content': content,
+                                                                'topic': topic})
 
     
 class TopicEditDetailView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
