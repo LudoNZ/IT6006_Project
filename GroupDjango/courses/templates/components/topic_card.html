@@ -4,7 +4,7 @@
         <a href="{% url 'topic_detail' pk=topic.id %}"> {{topic.name}}</a>
     </h3>
 
-    {% for content in topic.content_set.all %}
+    {% for content in contents %}
     {% if content.topic == topic %}
         <div class="topic_container">
             <div class="container_responsive">
