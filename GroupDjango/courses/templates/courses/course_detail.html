@@ -19,7 +19,7 @@
                         <h2 class="course_title"><a href="{% url 'course_delete' course.pk %}">Delete Course</a></h2>
                     </div>
                 {% endif %}
-            {%endfor%}
+            {% endfor %}
         {% endif %}
 
         <div class="course_content">
@@ -38,8 +38,8 @@
 
             <h2 class="course_detail_title">{{ course.name }} Topics:</h2>
             
-            <div class="course_detail_flex">           
-                {% for topic in course.topic_set.all %}
+            <div class="course_detail_flex">       
+                {% for topic in topics %}
                     
                     {% include 'components/topic_card.html' %} 
                 

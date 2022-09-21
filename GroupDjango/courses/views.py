@@ -24,6 +24,13 @@ class CourseDetailView(DetailView):
     model = Course
     template_name = "courses/course_detail.html"
 
+    def get(self, request, pk):
+        course = Course.objects.get(id=pk)
+        topics = Topic.objects.filter(course=course).all()
+        
+        return render(request, 'courses/course_detail.html', {'course': course, 'topics': topics})
+
+
 class CourseNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ("courses.add_courses")
     model = Course
