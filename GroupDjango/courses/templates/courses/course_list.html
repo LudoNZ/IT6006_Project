@@ -40,6 +40,32 @@
 {% block course_content %}
     <section class="container">
         <div class="course_container">
+
+            <h1 class="course_heading">{{ user.username }}'s Course Detail</h1>
+            {% for course in courses %}
+                <div class="card_course">
+                    <h2 class="course_title">
+                        <a href="{% url 'course_detail' course.pk %}">
+                            {{ course.name }}
+                        </a>       
+                    </h2>
+                
+
+                {% include 'components/course_card.html' %}
+                        {% if enrolment.user == user %}
+                            <div class="course_progressbar_container">
+                                <div class="course_progressbar_title"><p>Course Progress: </p></div>
+                                <div class="course_progressbar_grey">
+                                    <div class="course_progress" style="width:{{ enrolment.grade|add:0 }}%">{{ enrolment.grade }} %</div>
+                                </div>
+                            </div>
+                            <div class="course_progressbar_container">
+                                <div class="course_progressbar_title"><p>Course Results: Question Count </p></div>
+                            </div>
+                        {% endif %}          
+                </div>
+            {% endfor %}
+
             {% if user.is_authenticated %}
                 {% for group in user.groups.all %}
                     {% if group.name == "Developer" %}
@@ -48,16 +74,9 @@
                             </h3>
                     {% endif %}
                 {%endfor%}
-                <h1 class="course_heading">{{ user.username }}'s Course Detail</h1>
+                
 
             {% endif %}
-
-            
-            {% for course in courses %}
-                
-                {% include 'components/course_card.html' %}
-
-            {% endfor %}
         </div>
     </section>
 {% endblock course_content %}

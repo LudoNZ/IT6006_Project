@@ -10,7 +10,7 @@
         <div class="container">
             <div class="course_header_container">
                 <div>
-                    <h1 class="course_heading_white">Python Beginners</h1>
+                    <h1 class="course_heading_white">#Python Beginners</h1>
                 </div>
             </div>
         </div>
@@ -19,8 +19,7 @@
 
 {% block course_content %}
 <section class="container">
-    <div class="course_container">
-        
+    <div class="course_container">   
         <div class="course_content_container">
             <div class="course_course_intro_container">
                 <h1 class="course_heading">{{ topic.name }}</h1>
@@ -46,11 +45,20 @@
             {% if user.is_authenticated %}
                 {% for group in user.groups.all %}
                     {% if group.name == "Developer" %}
-                        
+                        <h3 class="course_add_link">
+                            <a href="{% url 'topic_edit' topic.pk %}">
+                                <i class="fas fa-edit" id="purple"></i> Edit Topic
+                            </a>
+                        </h3>  
+                        <h3 class="course_add_link">
+                            <a href="{% url 'topic_delete' topic.pk %}">
+                                <i class="fas fa-trash-alt" id="orange"></i> Delete Topic
+                            </a>
+                        </h3> 
                     {% endif %}
-                {% endfor %}
+                {%endfor%}
             {% endif %}
-            <br>
+
         </div>
     </div>
 </section>

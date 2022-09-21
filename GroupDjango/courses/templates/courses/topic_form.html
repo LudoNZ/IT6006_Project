@@ -16,7 +16,7 @@
         <div class="container">
             <div class="course_header_container">
                 <div>
-                    <h1 class="course_heading">Course Editer</h1>
+                    <h1 class="course_heading_white">Topic Editer</h1>
                 </div>
             </div>
         </div>
@@ -28,7 +28,14 @@
     <div class="container">
         <div class="course_form_center">
             <div class="course_form_card">
-                <h1 class="course_form_title">Create New Course</h1>
+                <h1 class="forum_form_title">
+                    {% if not topic.pk %}
+                        Create a new topic
+                    {% else%}
+                        Update Topic
+                    {% endif %}
+                </h1>
+
                 <form action="" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form|crispy }}

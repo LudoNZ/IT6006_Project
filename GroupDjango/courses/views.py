@@ -14,8 +14,10 @@ from enrolment.models import Result, Enrolment
 
 # Create your views here.
 
+
 class DeveloperPageView(TemplateView):
     template_name = "courses/developer.html"
+
 
 class CourseListView(ListView):
     model = Course
@@ -46,6 +48,7 @@ class CourseListView(ListView):
                                                             })
 
 
+
 class CourseDetailView(DetailView):
     model = Course
     template_name = "courses/course_detail.html"
@@ -73,33 +76,40 @@ class CourseDetailView(DetailView):
 class CourseNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ("courses.add_courses")
     model = Course
-    template_name = "courses/course_add.html"
-    success_url="../../../courses/list/"
-    fields =["name", "whatHeading", "whatDescription", "howHeading", "howDescription", "price"]
+    #template_name = "courses/course_add.html"
+    success_url = "../../../course/courses/list/"
+    fields = ["name", "whatHeading", "whatDescription",
+              "howHeading", "howDescription", "price"]
+
 
 class CourseEditDetailView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ("courses.change_courses")
     model = Course
-    template_name = "courses/course_edit.html"
-    success_url="../../../courses/list/"
-    fields =["name", "whatHeading", "whatDescription", "howHeading", "howDescription", "price"]
+    #template_name = "courses/course_edit.html"
+    success_url = "/course/courses/list/"
+    fields = ["name", "whatHeading", "whatDescription",
+              "howHeading", "howDescription", "price"]
+
 
 class CourseDeleteDetailView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     permission_required = ("courses.delete_courses")
     model = Course
     template_name = "courses/course_delete.html"
-    success_url=reverse_lazy("courses")
+    success_url = reverse_lazy("course_list")
+
 
 class TopicListView(DetailView):
     model = Course
     template_name = "courses/topic_list.html"
 
+
 class TopicNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ("courses.add_topics")
     model = Topic
-    template_name = "courses/topic_add.html"
-    success_url="../../../courses/list/"
-    fields =["course", "name", "intro"]
+    #template_name = "courses/topic_add.html"
+    success_url = "/course/courses/list/"
+    fields = ["course", "name", "intro"]
+
 
 class TopicDetailView(DetailView):
     model = Topic
@@ -123,20 +133,22 @@ class TopicDetailView(DetailView):
 class TopicEditDetailView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ("courses.change_courses")
     model = Topic
-    template_name = "courses/topic_edit.html"
-    success_url="../../../courses/list/"
-    fields =["course", "name", "intro"]
+    #template_name = "courses/topic_edit.html"
+    success_url = "/course/courses/list/"
+    fields = ["course", "name", "intro"]
+
 
 class TopicDeleteDetailView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView, DetailView):
     permission_required = ("courses.delete_courses")
     model = Topic
     template_name = "courses/topic_delete.html"
-    success_url=reverse_lazy("courses")
+    success_url = reverse_lazy("course_list")
+
 
 class ContentDetailView(DetailView):
     model = Content
     template_name = "courses/content_detail.html"
-    
+
     def get(self, request, pk):
         content = Content.objects.get(pk=pk)
         user_results = Result.objects.filter(user=request.user).all()
@@ -154,40 +166,41 @@ class ContentNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateVi
     permission_required = ("courses.add_topics")
     model = Content
     template_name = "courses/content_add.html"
-    success_url="../../../courses/list/"
-    fields =["topic", "name", "explanation", "example", "minutesToComplete"]
+    success_url = "../../../courses/list/"
+    fields = ["topic", "name", "explanation", "example", "minutesToComplete"]
+
 
 def answer_true(request, id, pk):
     question = get_object_or_404(Question, id=id)
-        
+
     if question.answer:
         result = Result.objects.update_or_create(
-                        user=request.user, 
-                        question=question,
-                        defaults={'result': True})
+            user=request.user,
+            question=question,
+            defaults={'result': True})
     else:
         result = Result.objects.update_or_create(
-                        user=request.user, 
-                        question=question,
-                        defaults={'result': False})
+            user=request.user,
+            question=question,
+            defaults={'result': False})
     result.save()
 
     return JsonResponse({'is_correct': result.result})
 
+
 def answer_false(request, id, pk):
     question = get_object_or_404(Question, id=id)
-    
 
     if not question.answer:
         result = Result.objects.update_or_create(
-                        user=request.user, 
-                        question=question,
-                        defaults={'result': True})
+            user=request.user,
+            question=question,
+            defaults={'result': True})
     else:
         result = Result.objects.update_or_create(
-                        user=request.user, 
-                        question=question,
-                        defaults={'result': False})
+            user=request.user,
+            question=question,
+            defaults={'result': False})
 
     result.save()
 
