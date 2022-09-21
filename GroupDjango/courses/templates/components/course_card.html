@@ -6,27 +6,31 @@
     </h2>
 
     {% for enrolment in enrolments %}
-    {% if enrolment.course == course %}
-        {% if enrolment.user == user %}
-            <div class="course_progressbar_container">
-                <div class="course_progressbar_title"><p>Course Progress: </p></div>
-                <div class="course_progressbar_grey">
-                    <div class="course_progress" style="width:{{ enrolment.grade|add:0 }}%">{{ enrolment.grade }} %</div>
+        {% if enrolment.course == course %}
+            {% if enrolment.user == user %}
+            
+                <div class="course_progressbar_container">
+                    <div class="course_progressbar_title"><p>Course Progress: </p></div>
+                    <div class="course_progressbar_grey">
+                        <div class="course_progress" style="width:{{ enrolment.grade|add:0 }}%">{{ enrolment.grade }} %</div>
+                    </div>
                 </div>
-            </div>
-            <div class="course_progressbar_container">
-                <div class="course_progressbar_title"><p>Course Results: </p></div>
-                <div class="course_progressbar_grey">
-                    <div class="course_progress" style="width:90%"> 90 %</div>
+                <div class="course_progressbar_container">
+                    <div class="course_progressbar_title"><p>Course Results: </p></div>
+                    <div class="course_progressbar_grey">
+                        <div class="course_progress" style="width:90%"> 90 %</div>
+                    </div>
                 </div>
-            </div>
-            <div class="course_progressbar_container">
-                <div class="course_progressbar_title"><p>Question Count:  </p></div>
-                <div class="course_progressbar_grey">
-                    <div class="course_progress" style="width:90%"> 7/8</div>
+                <div class="course_progressbar_container">
+                    <div class="course_progressbar_title"><p>Question Count:  </p></div>
+                    <div class="course_progressbar_grey">
+                        <div class="course_progress" style="width:90%"> 7/8</div>
+                    </div>
                 </div>
-            </div>
-        {% endif %}          
-    {% endif %}
+
+            {% endif %}          
+        {% endif %}
     {% endfor enrolment %}
+
+        
 </div>
