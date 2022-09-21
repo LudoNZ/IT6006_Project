@@ -40,10 +40,7 @@ class CourseListView(ListView):
                         e.grade = int(c.template_user_result / question_count *100 )
                     else:
                         e.grade = 0
-                    print('question_count = ', question_count)
-                    print('c.template_user_result =', c.template_user_result)
-
-
+                    
         return render(request, 'courses/course_list.html', {'courses': courses,
                                                             'enrolments': enrolments,
                                                             })
