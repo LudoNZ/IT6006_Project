@@ -4,7 +4,7 @@
     
     <div class="topic_container">
         <span class="course_progressbar_title"><i class="far fa-clock" id="purple"></i> {{ c.minutesToComplete }} min</span>
-        <span class="course_progressbar_title" style="padding-left:10px"><i class="fas fa-star" id="purple"></i> Progress: RESULTS/{{ c.count_questions }}</span>
+        <span class="course_progressbar_title" style="padding-left:10px"><i class="fas fa-star" id="purple"></i> Progress: {{c.template_user_result}}/{{ c.count_questions }}</span>
         <br>
         {% if user.is_authenticated %}
                 {% for group in user.groups.all %}
