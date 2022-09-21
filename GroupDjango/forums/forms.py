@@ -8,6 +8,6 @@ class CommentForm(forms.ModelForm):
         model = Comment
         fields = ('message',)
 
-    widgets = {
-        'message': forms.Textarea(attrs={'class': 'editable medium-editor-textarea'})
-    }
+        widgets = {
+            'message': forms.Textarea(attrs={'class': 'editable medium-editor-textarea'})
+        }

@@ -41,14 +41,7 @@ li {
     margin-left: auto;
 }
 
-@media screen and (max-width: 800px) {
-    .container {
-        padding-right: 5px;
-        padding-left: 5px;
-        margin-right: 0;
-        margin-left: 0;
-    }
-}
+
 
 .center_container {
     display: flex;
@@ -77,6 +70,7 @@ button {
 .nav-links a {
     color: #444444;
 }
+
 
 
 /* Mobile NAVBAR MENU */
@@ -131,6 +125,17 @@ nav {
 }
 
 @media screen and (max-width: 950px) {
+    .topnav a:not(:first-child) {
+        display: none;
+    }
+
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 950px) {
     .topnav.responsive {
         position: relative;
     }
@@ -146,7 +151,14 @@ nav {
         display: block;
         text-align: left;
     }
+
+    #right {
+        float: none;
+        margin-top: 1.7rem;
+    }
+
 }
+
 
 
 /* Course NAVBAR STYLING */
@@ -178,24 +190,6 @@ nav {
 
 #c_menu {
     margin: 1rem 0;
-}
-
-
-
-@media screen and (max-width: 950px) {
-    nav {
-        padding: 0;
-    }
-
-    .topnav a:not(:first-child) {
-        display: none;
-    }
-
-    .topnav a.icon {
-        float: right;
-        display: block;
-    }
-
 }
 
 
@@ -489,6 +483,8 @@ nav {
     padding-left: .5rem;
 }
 
+
+
 /* Footer */
 .footer_items {
     display: flex;
@@ -509,8 +505,8 @@ nav {
     margin-left: 1rem;
 }
 
-.p_right :hover {
-    color: #888888;
+.p_right:hover {
+    color: #9144D9;
 
 }
 
@@ -538,58 +534,3 @@ nav {
         width: 1170px;
     }
 }
-
-
-
-
-/* 
-body{
-    width:100%;
-    padding:0px;
-    margin: 0px;
-    text-align:center;
-}
-
-header{
-    color: white;
-}
-
-section{
-    display:inline-block;
-    width:900px;
-    text-align: left;
-}
-
-.fullwidth {
-    width: 100%;
-    text-align:center;
-    display:inline-block;
-    background-color:darkslategrey;
-}
-
-.gridbox {
-    display:inline-block;
-    width:900px;
-}
-.navbutton {
-    padding: 5px;
-    float: right;
-    text-align: center;
-    width:80px;
-    color: White;
-}
-.navbutton:hover {
-    float: right;
-    text-align: center;
-    width:80px;
-    background-color:blanchedalmond;
-    color: Black;
-}
-.buttonbox {
-    padding-top:20px;
-    display: inline-block;
-    vertical-align: middle;
-    float:right;
-}
-
-*/

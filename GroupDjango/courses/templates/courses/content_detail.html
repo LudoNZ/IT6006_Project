@@ -1,35 +1,42 @@
-{% extends "base.html" %}
-
+{% extends 'courses/course_base.html' %}
 
 {% block title %} 
     {{content.topic.course.name}}|{{content.topic.name}}|{{content.name}}
 {% endblock title %} 
 
-
-{% block content %}
-<section class="container">
-    <div class="course_container">
-        {% if user.is_authenticated %}
-            
-        {% endif %}
-
-        <div>
-            <h1 class="course_heading">{{ content.name }}</h1>
-            <p>expected time: {{ content.minutesToComplete }} min</p>
+{% block course_header %}
+    <div class="course_header_container">
+        <div class="container">
+            <div class="course_header_container">
+                <div>
+                    <h1 class="course_heading_White">Python Beginners</h1>
+                </div>
+            </div>
         </div>
-        <br>
-            <p class="border">{{ content.explanation }}<p>
-                <p class="border">{{ content.example }}<p>
-       
-       <div class="course_detail_flex">
-            {% for question in content.question_set.all %} 
-                
-                {% include 'components/question_card.html' %}
-
-            {% endfor question %}
-        <div> 
-        
-          
     </div>
-</section>
-{% endblock content %}
+{% endblock %}
+
+{% block course_content %}
+    <section class="container">
+        <div class="course_container">
+            <div class="course_content_container">
+                <div class="course_course_intro_container">
+                    <h5 class="content_detail_topic_title"># Get Started ></h5>
+                    <h1 class="course_heading">{{ content.name }}</h1>
+                    <p class="course_border"><p>
+                    <span class="course_progressbar_title">
+                        <i class="far fa-clock" id="purple"></i>
+                        Expected time: {{ content.minutesToComplete }}  min</span>
+                </div>
+                <p class="course_detail_p">{{ content.explanation }}<p>
+                <p class="course_detail_p">{{ content.example }}<p>
+            </div>
+            <br>        
+                {% for question in content.question_set.all %}                    
+                    {% include 'components/question_card.html' %}
+                {% endfor question %}
+                <a href="#">< Back</a>
+                <a href="#" style="float:right">Next ></a>
+        </div>
+    </section>
+{% endblock %}

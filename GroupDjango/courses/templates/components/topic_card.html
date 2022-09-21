@@ -1,14 +1,20 @@
-<div class="card">
-    <div>
+<div class="card_course_topic">
+    {% comment %} <div>
         <div style="float:right;"><a style="color:#9c62d1" href="{% url 'topic_delete' topic.pk %}">Delete</a>
         </div>
         <div style="float:right;margin-right:10px;"><a style="color:#9c62d1" href="{% url 'topic_edit' topic.pk %}">Edit</a>
         </div>
-    </div>
-    <a href="{% url 'topic_detail' pk=topic.id %}"> <h3 class="topic_name">{{topic.name}}</h3></a>
+    </div> {% endcomment %}
+
+    
+        <h3 class="topic_name"><a href="{% url 'topic_detail' pk=topic.id %}"> {{topic.name}}</a></h3>
+    
+
     {% for content in topic.content_set.all %}
-        <p class="cont_name"><i class="fas fa-caret-right"></i> {{content.name}}</p>
-        <p>time: #SUMofCONTENTS</p>
-        <p>questions: #RESULTS / #COUNT</p>
-    {% endfor content %}
+        <div class="topic_container">
+            <p class="topic_cont_name">{{content.name}} <i class="far fa-check-circle" style="color:#bbbbbb"></i></p>
+            <span class="course_progressbar_title"><i class="far fa-clock" id="purple"></i> 8 min</span>
+            <span class="course_progressbar_title" style="padding-left:10px"><i class="far fa-file-alt" id="purple"></i> Questions: 2 / 2</span>
+        </div>
+    {% endfor content %}      
 </div>

@@ -1,38 +1,57 @@
-{% extends "base.html" %}
+{% extends 'courses/course_base.html' %}
 
 
 {% block title %} 
     Topic Detail
 {% endblock title %} 
 
+{% block course_header %}
+    <div class="course_header_container">
+        <div class="container">
+            <div class="course_header_container">
+                <div>
+                    <h1 class="course_heading_white">Python Beginners</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
-{% block content %}
+{% block course_content %}
 <section class="container">
     <div class="course_container">
-        {% if user.is_authenticated %}
-            {% for group in user.groups.all %}
-                {% if group.name == "Developer" %}
-                    
-                {% endif %}
-            {% endfor %}
-        {% endif %}
+        
+        <div class="course_content_container">
+            <div class="course_course_intro_container">
+                <h1 class="course_heading">{{ topic.name }}</h1>
+                <p class="course_border"><p>
+            </div>
 
-        <div>
-            <h1 class="course_heading">{{ topic.name }}</h1>
+            <p class="course_detail_p"> {{ topic.intro }} </p>
+
+            <h2 class="course_detail_title"> {{ course.howHeading }}</h2>
+            <p class="course_detail_p"> {{ course.howDescription }} </p>
+    
+
+            <h2 class="course_detail_title" style="margin-bottom:10px">{{ course.name }} Topics:</h2>
+            
+            <div class="course_detail_flex">
+                {% for c in content %}
+                
+                    {% include 'components/content_card.html' %}
+        
+                {% endfor %}
+                <div> 
+
+            {% if user.is_authenticated %}
+                {% for group in user.groups.all %}
+                    {% if group.name == "Developer" %}
+                        
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <br>
         </div>
-            <p class="border">{{ topic.intro }}<p>
-
-        <div class="course_detail_flex">
-        
-        {% for c in content %}
-        
-            {% include 'components/content_card.html' %}
-        
-        {% endfor %}
-        
-        <div> 
-        
-          
     </div>
 </section>
-{% endblock content %}
+{% endblock course_content %}
