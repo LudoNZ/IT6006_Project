@@ -24,28 +24,31 @@ class CourseListView(ListView):
 
     def get(self, request):
         courses = Course.objects.all()
-        user_results = Result.objects.filter(user=request.user).all()
-        enrolments = Enrolment.objects.filter(user=request.user).all()
+        
+        if request.user.is_authenticated:      
+            user_results = Result.objects.filter(user=request.user).all()
+            enrolments = Enrolment.objects.filter(user=request.user).all()
 
+            for c in courses:
+                question_count = c.count_questions
+                c.template_user_result = 0
+                for e in enrolments:
+                    if e.course == c:
+                        for a in user_results:
+                            if a.question.content.topic.course == c:
+                                if a.result==True:
+                                    c.template_user_result += 1
+                        
+                        if question_count > 0:
+                            e.grade = int(c.template_user_result / question_count *100 )
+                        else:
+                            e.grade = 0
 
-        for c in courses:
-            question_count = c.count_questions
-            c.template_user_result = 0
-            for e in enrolments:
-                if e.course == c:
-                    for a in user_results:
-                        if a.question.content.topic.course == c:
-                            if a.result==True:
-                                c.template_user_result += 1
+            context =  {'courses': courses, 'enrolments': enrolments}
+        else:
+            context =  {'courses': courses}
                     
-                    if question_count > 0:
-                        e.grade = int(c.template_user_result / question_count *100 )
-                    else:
-                        e.grade = 0
-                    
-        return render(request, 'courses/course_list.html', {'courses': courses,
-                                                            'enrolments': enrolments,
-                                                            })
+        return render(request, 'courses/course_list.html', context)
 
 
 
