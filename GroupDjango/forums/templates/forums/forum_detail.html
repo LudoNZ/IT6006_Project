@@ -55,7 +55,7 @@
                 <span><i class="far fa-clock"></i> {{ comment.created_at }}</span>
                 {% if comment.user|stringformat:'s' == user.get_username|stringformat:'s' %}
                 <a class="comment_delete" href="{% url 'forums:comment_remove' pk=comment.pk %}">
-                    <i class="fas fa-trash-alt"></i> Delete</a>
+                    <i class="fas fa-trash-alt" id="orange"></i> Delete</a>
                 {% endif %}
             </div>
             <hr class="coment_line">

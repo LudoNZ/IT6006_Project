@@ -24,6 +24,26 @@ class CourseDetailView(DetailView):
     model = Course
     template_name = "courses/course_detail.html"
 
+    def get(self, request, pk):
+        course = Course.objects.get(id=pk)
+        topics = Topic.objects.filter(course=course).all()
+
+        contents = Content.objects.filter(topic__course__pk=pk).all()
+        user_results = Result.objects.filter(user=request.user, result=True).all()
+        
+        for c in contents:
+            c.template_user_result = 0
+            for a in user_results:
+                if a.question.content == c:
+                    c.template_user_result += 1
+        
+        return render(request, 'courses/course_detail.html', {'course': course, 
+                                                                'topics': topics,
+                                                                'contents': contents,
+                                                                'user_results': user_results,
+                                                                })
+
+
 class CourseNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     permission_required = ("courses.add_courses")
     model = Course
@@ -58,7 +78,22 @@ class TopicNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView
 class TopicDetailView(DetailView):
     model = Topic
     template_name = "courses/topic_detail.html"
+    
+    def get(self, request, pk):
+        topic = Topic.objects.get(id=pk)
+        content = Content.objects.filter(topic__pk=pk).all()
+        user_results = Result.objects.filter(user=request.user, result=True).all()
+        
+        for c in content:
+            c.template_user_result = 0
+            for a in user_results:
+                if a.question.content == c:
+                    c.template_user_result += 1
 
+        return render(request, 'courses/topic_detail.html', {'content': content,
+                                                                'topic': topic})
+
+    
 class TopicEditDetailView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = ("courses.change_courses")
     model = Topic
@@ -79,8 +114,14 @@ class ContentDetailView(DetailView):
     def get(self, request, pk):
         content = Content.objects.get(pk=pk)
         user_results = Result.objects.filter(user=request.user).all()
+        
+        prev_id= content.id - 1
+        next_id= content.id + 1
+
         return render(request, 'courses/content_detail.html', {'user_results': user_results, 
-                                                                'content': content})
+                                                                'content': content,
+                                                                'prev_id': prev_id,
+                                                                'next_id': next_id})
 
 
 class ContentNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):

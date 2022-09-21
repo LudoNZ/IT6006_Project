@@ -1,14 +1,40 @@
-{% extends "base.html" %} {%block content %}
+{% extends 'courses/course_base.html' %}
+{% load crispy_forms_tags %}
 
-<section class="container">
-    <div class="course_container">
-        <h1>New Course</h1>
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Save">
-        </form>
+{% block bootstrap %}
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+{% endblock bootstrap %}
+
+{% block title %} 
+    Create Course
+{% endblock title %} 
+
+{% block course_header %}
+    <div class="course_header_container">
+        <div class="container">
+            <div class="course_header_container">
+                <div>
+                    <h1 class="course_heading">Course Editer</h1>
+                </div>
+            </div>
+        </div>
     </div>
-</section>
 
-{% endblock content %}
+{% endblock course_header %}
+
+{% block course_content %}
+    <div class="container">
+        <div class="course_form_center">
+            <div class="course_form_card">
+                <h1 class="course_form_title">Create New Course</h1>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button class="reg_button" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock course_content %}
