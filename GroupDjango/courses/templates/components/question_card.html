@@ -1,4 +1,5 @@
-<div class="card_course">
+<!-- Question Card -->
+<div class="card_question">
     <div>
         <div style="float:right;">
             <a style="color:#9c62d1" href="#">Delete</a>
@@ -7,29 +8,32 @@
             <a style="color:#9c62d1" href="#">Edit</a>
         </div>
     </div>
-    <h5>Question</h5>
+
+    <h2 class="course_detail_title">Question:</h2>
     <a href="{% url 'content_detail' pk=content.id %}" type="button">
-        <h3 class="topic_name">
+        <h3 class="content_question">
             {{question.question}}
         </h3>
-        <button id="true_{{question.id}}" type="button" value="True" class="topic_name">
-            True
-        </button>
-        <button id="false_{{question.id}}" type="button" value="True" class="topic_name">
-            False
-        </button>
+        <div class="btn_question_position_center">
+            <button id="true_{{question.id}}" type="button" value="True" class="btn_question" style="background-color:#41ab48">
+                True
+            </button>
+            <button id="false_{{question.id}}" type="button" value="True" class="btn_question" style="background-color:#d13e36">
+                False
+            </button>
+        </div>
     </a>
+    <div class="result_container">
     {% for result in user_results %}
         {% if result.question == question %}
-            {% if result.result %}
-            <svg style="color: rgb(57, 221, 54);" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16"> <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" fill="#39dd36"></path> <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z" fill="#39dd36"></path> </svg>
-            {% else %}
-            <svg style="color: red" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16zM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12zm5.793-4.207a1 1 0 0 1 1.414 0L12 10.586l2.793-2.793a1 1 0 1 1 1.414 1.414L13.414 12l2.793 2.793a1 1 0 0 1-1.414 1.414L12 13.414l-2.793 2.793a1 1 0 0 1-1.414-1.414L10.586 12 7.793 9.207a1 1 0 0 1 0-1.414z" fill="red"></path></svg>
-            {% endif %}
+        {% if result.result %}
+            <p class="result"><i class="far fa-check-circle" style="color:#41ab48"></i> Correct</p>
+        {% else %}
+            <p class="result"><i class="far fa-times-circle" style="color:#d13e36"></i> Wrong Anser<p>
         {% endif %}
-    {% endfor %}
-    
-    
+        {% endif %}
+    {% endfor %} 
+    </div>
 </div>
 
 <script>

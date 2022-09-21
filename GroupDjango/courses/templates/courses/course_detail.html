@@ -1,6 +1,5 @@
 {% extends 'courses/course_base.html' %}
 
-
 {% block title %} 
     Course Detail
 {% endblock title %} 
@@ -30,8 +29,12 @@
                     <a href="#">Register</a>
                 </button>
                 <p class="course_price">
-                    <span><i class="far fa-clock" id="purple"></i> 5 hours in Total</span>
-                    <span style="padding-left:15px"><i class="fas fa-money-bill" id="purple"></i> $ {{ course.price }}</span>
+                    <span class="container_responsive" style="padding-right:15px">
+                        <i class="far fa-clock" id="purple"></i> 5 hours in Total
+                    </span>
+                    <span>
+                        <i class="fas fa-money-bill" id="purple"></i> $ {{ course.price }}
+                    </span>
                 </p>
             </div>
 
@@ -41,8 +44,7 @@
             <h2 class="course_detail_title"> {{ course.howHeading }}</h2>
             <p class="course_detail_p"> {{ course.howDescription }} </p>
     
-
-            <h2 class="course_detail_title" style="margin-bottom:10px">{{ course.name }} Topics:</h2>
+            <h2 class="course_detail_title" style="margin-bottom:10px">{{ course.name }} Topics:</h2>     
             
             <div class="course_detail_flex">       
                 {% for topic in topics %}
@@ -56,21 +58,26 @@
                 {% for group in user.groups.all %}
                     {% if group.name == "Developer" %}
                         <h3 class="course_add_link">
-                            <a href="{% url 'course_delete' course.pk %}" style="padding-left:20px"><i class="fas fa-trash-alt" id="orange"></i> Delete Course</a>
-                        </h3>
-                        <h3 class="course_add_link" style="padding-left:20px">
-                            <a href="{% url 'course_edit' course.pk %}"><i class="fas fa-edit" id="purple"></i> Edit Course</a>
+                            <a href="{% url 'course_edit' course.pk %}">
+                                <i class="fas fa-edit" id="purple"></i> Edit Course
+                            </a>
                         </h3>
                         <h3 class="course_add_link">
-                            <a href="{% url 'topic_add' %}"><i class="fas fa-plus-circle" id="orange"></i> Add Topic</a>
-                        </h3>          
+                            <a href="{% url 'course_delete' course.pk %}">
+                                <i class="fas fa-trash-alt" id="orange"></i> Delete Course
+                            </a>
+                        </h3>
+                        <h3 class="course_add_link">
+                            <a href="{% url 'topic_add' %}">
+                                <i class="fas fa-plus-circle" id="orange"></i> Add Topic
+                            </a>
+                        </h3>  
+                        
+                                                   
                     {% endif %}
                 {%endfor%}
             {% endif %}
-            <br>
-            <button class="btn_topic_list">
-                <a href="{% url 'topic_list' course.id %}">More about Topics</a>
-            </button>
+
         </div>
     </div>
 </section>
