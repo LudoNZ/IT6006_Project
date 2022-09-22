@@ -25,8 +25,8 @@
                 <h1 class="course_heading">{{ course.name }}</h1>
                 <p class="course_border"><p>
                 
-                <button class="btn_course_register">
-                    <a href="#">Register</a>
+                <button class="btn_course_register" id="enrol_{{course.id}}" type="button" value="True">
+                    Register
                 </button>
                 <p class="course_price">
                     <span class="container_responsive" style="padding-right:15px">
@@ -81,4 +81,19 @@
         </div>
     </div>
 </section>
+
+<script>
+    $("#enrol_{{course.id}}").click(function () {
+         $.ajax({
+             type: "POST",
+             url: "{% url 'course_enrol' pk=course.id %}",
+             data: { 'csrfmiddlewaretoken': '{{csrf_token}}' },
+             dataType: "json",
+             success: function (r) {
+                 alert(r)
+             },
+             error: function (rs, e) { }
+         });
+    })
+ </script>
 {% endblock course_content %}

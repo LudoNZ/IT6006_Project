@@ -50,6 +50,34 @@ class CourseListView(ListView):
                     
         return render(request, 'courses/course_list.html', context)
 
+    def post(self, request):
+        courses = Course.objects.all()
+        
+        if request.user.is_authenticated:      
+            user_results = Result.objects.filter(user=request.user).all()
+            enrolments = Enrolment.objects.filter(user=request.user).all()
+
+            for c in courses:
+                question_count = c.count_questions
+                c.template_user_result = 0
+                for e in enrolments:
+                    if e.course == c:
+                        for a in user_results:
+                            if a.question.content.topic.course == c:
+                                if a.result==True:
+                                    c.template_user_result += 1
+                        
+                        if question_count > 0:
+                            e.grade = int(c.template_user_result / question_count *100 )
+                        else:
+                            e.grade = 0
+
+            context =  {'courses': courses, 'enrolments': enrolments}
+        else:
+            context =  {'courses': courses}
+                    
+        return render(request, 'courses/course_list.html', context)
+
 
 
 class CourseDetailView(DetailView):
@@ -214,3 +242,15 @@ def answer_false(request, id, pk):
     result.save()
 
     return JsonResponse({'is_correct': result.result})
+
+def enrol(request, pk):
+    course = get_object_or_404(Course, id=pk)
+    
+    enrolment = Enrolment.objects.update_or_create(
+        user=request.user,
+        course=course,
+        defaults={'grade': 0})
+    
+    enrolment.save()
+
+    return JsonResponse({'is_correct': enrolment.access})
