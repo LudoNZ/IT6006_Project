@@ -172,23 +172,19 @@
     margin-bottom: 1rem;
 }
 
-.btn_course_register {
-    display: inline;
-    margin: 1rem 0 2rem 0;
-    float: right;
-    margin-left: 1rem;
-}
-
-.btn_course_register a {
-    padding: .8rem 2rem;
+.button_course_register {
+    text-decoration: none;
+    width: 6.2rem;
+    height: 2.5rem;
     color: #FFFFFF;
     background-color: #9C62D1;
     border-radius: 5px;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    float: right;
 }
 
-.btn_course_register a:hover {
-    background-color: #ca71e7;
+.button_course_register:hover {
+    opacity: .6;
 }
 
 .course_content_container {
