@@ -41,7 +41,11 @@
     <section class="container">
         <div class="course_container">
 
-            <h1 class="course_heading">{{ user.username }}'s Course Detail</h1>
+            <h1 class="course_heading">
+                {% if user.is_authenticated %}
+                    {{ user.username }}'s 
+                {% endif %}  
+                    Course Detail</h1>
             {% for course in courses %}
 
                 {% include 'components/course_card.html' %}    
