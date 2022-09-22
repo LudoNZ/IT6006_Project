@@ -10,7 +10,6 @@
     </div>
 
     <h2 class="course_detail_title">Question:</h2>
-    <a href="{% url 'content_detail' pk=content.id %}" type="button">
         <h3 class="content_question">
             {{question.question}}
         </h3>
@@ -22,15 +21,14 @@
                 False
             </button>
         </div>
-    </a>
     <div class="result_container">
     {% for result in user_results %}
         {% if result.question == question %}
-        {% if result.result %}
-            <p class="result"><i class="far fa-check-circle" style="color:#41ab48"></i> Correct</p>
-        {% else %}
-            <p class="result"><i class="far fa-times-circle" style="color:#d13e36"></i> Wrong Anser<p>
-        {% endif %}
+            {% if result.result %}
+                <p id="feedback_{{question.id}}" class="result"><i class="far fa-check-circle" style="color:#41ab48"></i> Correct</p>
+            {% else %}
+                <p id="feedback_{{question.id}}" class="result"><i class="far fa-times-circle" style="color:#d13e36"></i> Wrong Anser<p>
+            {% endif %}
         {% endif %}
     {% endfor %} 
     </div>
@@ -43,12 +41,13 @@
              url: "{% url 'answer_true' id=question.id pk=content.id %}",
              data: { 'csrfmiddlewaretoken': '{{csrf_token}}' },
              dataType: "json",
-             success: function (r) {
-                 alert(r)
-             },
-             error: function (rs, e) { }
-         });
-    })
+             success: function (r) { $("#feedback_{{question.id}}").find("i").attr("class", r.result_is_correct ? "far fa-check-circle" : "far fa-times-circle");
+                                        $("#feedback_{{question.id}}").find("i").attr("style",  r.result_is_correct ? "color:#41ab48" : "color:#d13e36"); },
+             error: function (rs, e) { alert("Failure!!!!")}
+             });
+         })
+        
+    
 
     $("#false_{{question.id}}").click(function () {
         $.ajax({
@@ -56,10 +55,9 @@
             url: "{% url 'answer_false' id=question.id pk=content.id %}",
             data: { 'csrfmiddlewaretoken': '{{csrf_token}}' },
             dataType: "json",
-            success: function (r) {
-                alert(r)
-            },
-            error: function (rs, e) { }
-        });
-   })
+            success: function (r) { $("#feedback_{{question.id}}").find("i").attr("class", r.result_is_correct ? "far fa-check-circle" : "far fa-times-circle");
+                                        $("#feedback_{{question.id}}").find("i").attr("style",  r.result_is_correct ? "color:#41ab48" : "color:#d13e36"); },
+            error: function (rs, e) { alert("Failure!!!!")}
+            });
+        })
  </script>

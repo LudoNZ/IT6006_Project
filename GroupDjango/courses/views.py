@@ -188,13 +188,14 @@ class ContentDetailView(DetailView):
         content = Content.objects.get(pk=pk)
         prev_id= content.id - 1
         next_id= content.id + 1
+        result_is_correct = None
 
         if request.user.is_authenticated:
             user_results = Result.objects.filter(user=request.user).all()
             
-            context = {'content': content, 'prev_id': prev_id, 'next_id': next_id, 'user_results': user_results,}
+            context = {'content': content, 'prev_id': prev_id, 'next_id': next_id, 'result_is_correct': result_is_correct, 'user_results': user_results,}
         else:
-            context = {'content': content, 'prev_id': prev_id, 'next_id': next_id}
+            context = {'content': content, 'prev_id': prev_id, 'next_id': next_id, 'result_is_correct': result_is_correct }
 
         return render(request, 'courses/content_detail.html', context)
 
@@ -209,39 +210,43 @@ class ContentNewDetailView(LoginRequiredMixin, PermissionRequiredMixin, CreateVi
 
 def answer_true(request, id, pk):
     question = get_object_or_404(Question, id=id)
-
+    result_is_correct = None
+    
     if question.answer:
         result = Result.objects.update_or_create(
             user=request.user,
             question=question,
             defaults={'result': True})
+        result_is_correct = True
     else:
         result = Result.objects.update_or_create(
             user=request.user,
             question=question,
             defaults={'result': False})
-    result.save()
+        result_is_correct = False
 
-    return JsonResponse({'is_correct': result.result})
+    return JsonResponse({'result_is_correct': result_is_correct})
 
 
 def answer_false(request, id, pk):
     question = get_object_or_404(Question, id=id)
-
+    result_is_correct = None
+    
     if not question.answer:
         result = Result.objects.update_or_create(
             user=request.user,
             question=question,
             defaults={'result': True})
+        result_is_correct = True
     else:
         result = Result.objects.update_or_create(
             user=request.user,
             question=question,
             defaults={'result': False})
+        result_is_correct = False
 
-    result.save()
+    return JsonResponse({'result_is_correct': result_is_correct})
 
-    return JsonResponse({'is_correct': result.result})
 
 def enrol(request, pk):
     course = get_object_or_404(Course, id=pk)
